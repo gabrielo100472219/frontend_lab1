@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Tailwind busca clases en todos los ficheros del proyecto: la documentación
+   está llena de nombres de clases de ejemplo y no queremos que entren en la build. */
+@source not "../README.md";
+@source not "../NOTAS.md";
+
+/* Tokens de diseño: cada variable genera sus utilidades
+   (--color-cafe-900 → bg-cafe-900, text-cafe-900, border-cafe-900…). */
+@theme {
+  --color-crema-50: #fbf8f3;
+  --color-crema-100: #f4ece0;
+  --color-crema-200: #e8d9c3;
+
+  --color-cafe-500: #8b5e3c;
+  --color-cafe-700: #5a3a22;
+  --color-cafe-900: #2b1a10;
+
+  --color-tostado-500: #d97706;
+  --color-tostado-600: #b45309;
+  --color-tostado-700: #92400e;
+
+  --font-display: "Fraunces", Georgia, serif;
+}
+
+/* Dentro de capas, para que cualquier utilidad del HTML pueda sobrescribirlas (lección 16). */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-balance;
+  }
+
+  /* Foco visible en todo lo interactivo: currentColor siempre contrasta con su fondo. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-current;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold transition-colors motion-reduce:transition-none;
+  }
+
+  .btn-primario {
+    @apply bg-tostado-600 text-white hover:bg-tostado-700 focus-visible:outline-tostado-600;
+  }
+
+  .btn-secundario {
+    @apply border border-cafe-900/20 text-cafe-900 hover:border-cafe-900/40 hover:bg-crema-100;
+  }
+}

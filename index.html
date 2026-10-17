@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="es" class="motion-safe:scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tueste · Café de especialidad recién tostado, por suscripción</title>
+    <meta
+      name="description"
+      content="Tueste es un pequeño tostadero de café de especialidad. Elige tu plan y recibe cada mes café recién tostado en casa."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
+    />
+  </head>
+  <body class="bg-crema-50 text-cafe-900 antialiased">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-30 focus:rounded-full focus:bg-cafe-900 focus:px-4 focus:py-2 focus:text-crema-50 focus-visible:outline-cafe-900"
+    >
+      Saltar al contenido
+    </a>
+
+    <!-- ============ CABECERA ============ -->
+    <header class="sticky top-0 z-20 border-b border-crema-200 bg-crema-50/90 backdrop-blur">
+      <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <a href="#inicio" class="flex items-center gap-2 font-display text-2xl font-semibold">
+          <svg
+            class="size-7 text-tostado-600"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M10 2v2" />
+            <path d="M14 2v2" />
+            <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
+            <path d="M6 2v2" />
+          </svg>
+          Tueste
+        </a>
+
+        <div class="flex items-center gap-2 md:gap-6">
+          <nav aria-label="Principal">
+            <button
+              id="menu-button"
+              type="button"
+              class="peer group grid size-10 place-items-center rounded-full hover:bg-crema-100 md:hidden"
+              aria-expanded="false"
+              aria-controls="menu"
+            >
+              <span class="sr-only">Abrir menú</span>
+              <svg
+                class="size-6 group-aria-expanded:hidden"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <svg
+                class="hidden size-6 group-aria-expanded:block"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+
+            <ul
+              id="menu"
+              class="absolute inset-x-0 top-full hidden flex-col gap-1 border-b border-crema-200 bg-crema-50 px-4 py-4 shadow-lg peer-aria-expanded:flex md:static md:flex md:flex-row md:gap-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none"
+            >
+              <li><a href="#cafes" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600">Cafés</a></li>
+              <li><a href="#como-funciona" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600">Cómo funciona</a></li>
+              <li><a href="#planes" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600">Planes</a></li>
+              <li><a href="#faq" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600">FAQ</a></li>
+            </ul>
+          </nav>
+
+          <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">Suscríbete</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- ============ HERO ============ -->
+      <section
+        id="inicio"
+        class="mx-auto grid max-w-6xl scroll-mt-16 items-center gap-12 px-4 py-12 sm:px-6 md:min-h-[calc(100dvh-4rem)] md:grid-cols-2 md:py-16"
+      >
+        <div>
+          <p class="text-sm font-semibold tracking-widest text-tostado-600 uppercase">
+            Tostado en pequeños lotes
+          </p>
+          <h1 class="mt-4 text-4xl leading-tight font-semibold sm:text-5xl lg:text-6xl">
+            Café recién tostado, en tu puerta cada mes.
+          </h1>
+          <p class="mt-6 max-w-[45ch] text-lg text-cafe-700">
+            Seleccionamos granos de pequeños productores de Etiopía, Colombia o Kenia, los tostamos
+            la semana del envío y te los mandamos a casa. Tú solo tienes que moler y disfrutar.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#planes" class="btn btn-primario">Suscríbete</a>
+            <a href="#cafes" class="btn btn-secundario">Ver cafés</a>
+          </div>
+          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cafe-700">
+            <li class="flex items-center gap-2">
+              <svg class="size-4 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              Envío gratis
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="size-4 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              Cancela cuando quieras
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="size-4 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              En grano o molido
+            </li>
+          </ul>
+        </div>
+
+        <figure class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=900&q=75&auto=format&fit=crop"
+            srcset="
+              https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&q=75&auto=format&fit=crop   600w,
+              https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=900&q=75&auto=format&fit=crop   900w,
+              https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=1200&q=75&auto=format&fit=crop 1200w
+            "
+            sizes="(min-width: 768px) 50vw, 100vw"
+            alt="Granos de café tostado dentro de un cuenco de cerámica blanca"
+            width="900"
+            height="1125"
+            fetchpriority="high"
+            class="aspect-4/5 w-full rounded-3xl object-cover shadow-xl md:max-h-[75dvh]"
+          />
+          <figcaption
+            class="absolute -bottom-5 left-4 rounded-2xl bg-white px-5 py-3 shadow-lg sm:left-auto sm:-right-4"
+          >
+            <span class="block text-xs tracking-wide text-cafe-500 uppercase">Último tueste</span>
+            <span class="font-display text-lg font-semibold">Hace 3 días</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ CAFÉS DEL MES ============ -->
+      <section id="cafes" class="scroll-mt-16 bg-white py-20" aria-labelledby="cafes-titulo">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+          <div class="max-w-2xl">
+            <h2 id="cafes-titulo" class="text-3xl font-semibold sm:text-4xl">Cafés del mes</h2>
+            <p class="mt-4 text-lg text-cafe-700">
+              Tres orígenes, tres formas de entender el café. Cambiamos la selección cada mes según la
+              temporada de cosecha.
+            </p>
+          </div>
+
+          <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <li>
+              <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition-shadow hover:shadow-lg motion-reduce:transition-none">
+                <div class="relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&q=75&auto=format&fit=crop"
+                    alt=""
+                    width="600"
+                    height="400"
+                    loading="lazy"
+                    class="aspect-3/2 w-full object-cover"
+                  />
+                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                    Tueste claro
+                  </span>
+                </div>
+                <div class="flex flex-1 flex-col gap-4 p-6">
+                  <div>
+                    <h3 class="text-2xl font-semibold">Etiopía</h3>
+                    <p class="text-sm text-cafe-500">Yirgacheffe · 2.000 m · Lavado</p>
+                  </div>
+                  <ul class="flex flex-wrap gap-2 text-sm" aria-label="Notas de cata">
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Jazmín</li>
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Bergamota</li>
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Melocotón</li>
+                  </ul>
+                  <p class="text-cafe-700">Floral y delicado, con una acidez cítrica muy limpia. Ideal en filtro.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                    <p>
+                      <span class="font-display text-2xl font-semibold">14,90 €</span>
+                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                    </p>
+                    <a href="#planes" class="font-semibold text-tostado-600 hover:text-tostado-700">
+                      Elegir <span aria-hidden="true">→</span><span class="sr-only"> Etiopía</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <li>
+              <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition-shadow hover:shadow-lg motion-reduce:transition-none">
+                <div class="relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=600&h=400&q=75&auto=format&fit=crop"
+                    alt=""
+                    width="600"
+                    height="400"
+                    loading="lazy"
+                    class="aspect-3/2 w-full object-cover"
+                  />
+                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                    Tueste medio
+                  </span>
+                </div>
+                <div class="flex flex-1 flex-col gap-4 p-6">
+                  <div>
+                    <h3 class="text-2xl font-semibold">Colombia</h3>
+                    <p class="text-sm text-cafe-500">Huila · 1.700 m · Lavado</p>
+                  </div>
+                  <ul class="flex flex-wrap gap-2 text-sm" aria-label="Notas de cata">
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Caramelo</li>
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Manzana roja</li>
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Cacao</li>
+                  </ul>
+                  <p class="text-cafe-700">Dulce y redondo, el café de todos los días. Funciona en cualquier cafetera.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                    <p>
+                      <span class="font-display text-2xl font-semibold">12,90 €</span>
+                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                    </p>
+                    <a href="#planes" class="font-semibold text-tostado-600 hover:text-tostado-700">
+                      Elegir <span aria-hidden="true">→</span><span class="sr-only"> Colombia</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <li>
+              <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition-shadow hover:shadow-lg motion-reduce:transition-none">
+                <div class="relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=600&h=400&q=75&auto=format&fit=crop"
+                    alt=""
+                    width="600"
+                    height="400"
+                    loading="lazy"
+                    class="aspect-3/2 w-full object-cover"
+                  />
+                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                    Tueste claro
+                  </span>
+                </div>
+                <div class="flex flex-1 flex-col gap-4 p-6">
+                  <div>
+                    <h3 class="text-2xl font-semibold">Kenia</h3>
+                    <p class="text-sm text-cafe-500">Nyeri AA · 1.800 m · Doble lavado</p>
+                  </div>
+                  <ul class="flex flex-wrap gap-2 text-sm" aria-label="Notas de cata">
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Grosella negra</li>
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Pomelo</li>
+                    <li class="rounded-full bg-crema-100 px-3 py-1">Frutos rojos</li>
+                  </ul>
+                  <p class="text-cafe-700">Intenso y jugoso, con mucho cuerpo. Para quien busca un café con carácter.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                    <p>
+                      <span class="font-display text-2xl font-semibold">15,50 €</span>
+                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                    </p>
+                    <a href="#planes" class="font-semibold text-tostado-600 hover:text-tostado-700">
+                      Elegir <span aria-hidden="true">→</span><span class="sr-only"> Kenia</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ CÓMO FUNCIONA ============ -->
+      <section
+        id="como-funciona"
+        class="scroll-mt-16 bg-cafe-900 py-20 text-crema-50"
+        aria-labelledby="como-funciona-titulo"
+      >
+        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 id="como-funciona-titulo" class="text-center text-3xl font-semibold sm:text-4xl">Cómo funciona</h2>
+          <p class="mx-auto mt-4 max-w-xl text-center text-lg text-crema-200">
+            Sin permanencia ni complicaciones. De nuestro tostador a tu taza en tres pasos.
+          </p>
+
+          <ol class="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
+            <li
+              class="relative flex flex-col items-center text-center md:after:absolute md:after:top-7 md:after:left-[calc(50%+2.25rem)] md:after:h-px md:after:w-[calc(100%-2rem)] md:after:bg-crema-200/40"
+            >
+              <span class="grid size-14 place-items-center rounded-full bg-tostado-600 font-display text-xl font-semibold">1</span>
+              <h3 class="mt-6 text-xl font-semibold">Eliges</h3>
+              <p class="mt-2 max-w-[30ch] text-crema-200">
+                Escoge tu plan, cuántas bolsas quieres y si lo prefieres en grano o molido para tu cafetera.
+              </p>
+            </li>
+            <li
+              class="relative flex flex-col items-center text-center md:after:absolute md:after:top-7 md:after:left-[calc(50%+2.25rem)] md:after:h-px md:after:w-[calc(100%-2rem)] md:after:bg-crema-200/40"
+            >
+              <span class="grid size-14 place-items-center rounded-full bg-tostado-600 font-display text-xl font-semibold">2</span>
+              <h3 class="mt-6 text-xl font-semibold">Tostamos</h3>
+              <p class="mt-2 max-w-[30ch] text-crema-200">
+                Tostamos tu café en pequeños lotes la misma semana del envío, para que llegue en su mejor momento.
+              </p>
+            </li>
+            <li class="flex flex-col items-center text-center">
+              <span class="grid size-14 place-items-center rounded-full bg-tostado-600 font-display text-xl font-semibold">3</span>
+              <h3 class="mt-6 text-xl font-semibold">Te llega a casa</h3>
+              <p class="mt-2 max-w-[30ch] text-crema-200">
+                Lo recibes en 24-48 h en una bolsa con válvula que conserva el aroma. Envío gratis.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ PLANES ============ -->
+      <section id="planes" class="scroll-mt-16 py-20" aria-labelledby="planes-titulo">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+          <div class="mx-auto max-w-2xl text-center">
+            <h2 id="planes-titulo" class="text-3xl font-semibold sm:text-4xl">Planes de suscripción</h2>
+            <p class="mt-4 text-lg text-cafe-700">Elige cuánto café tomas al mes. Puedes cambiar de plan o pausarlo cuando quieras.</p>
+          </div>
+
+          <ul class="mx-auto mt-14 grid max-w-md gap-8 md:max-w-none md:grid-cols-3 md:items-center md:gap-6">
+            <li>
+              <article class="flex flex-col rounded-3xl border border-crema-200 bg-white p-8">
+                <h3 class="text-2xl font-semibold">Básico</h3>
+                <p class="mt-1 text-cafe-500">Para empezar a descubrir</p>
+                <p class="mt-6">
+                  <span class="font-display text-4xl font-semibold">12,90 €</span>
+                  <span class="text-cafe-500">/ mes</span>
+                </p>
+                <ul class="mt-6 space-y-3 text-cafe-700">
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    1 bolsa de 250 g al mes
+                  </li>
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    El café del mes que elijamos
+                  </li>
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    Envío gratis
+                  </li>
+                </ul>
+                <a href="#planes" class="btn btn-secundario mt-8">Elegir Básico</a>
+              </article>
+            </li>
+
+            <li>
+              <article class="relative flex flex-col rounded-3xl border-2 border-tostado-600 bg-white p-8 shadow-xl md:scale-105">
+                <p class="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-tostado-600 px-4 py-1 text-sm font-semibold whitespace-nowrap text-white">
+                  ⭐ Más popular
+                </p>
+                <h3 class="text-2xl font-semibold">Popular</h3>
+                <p class="mt-1 text-cafe-500">Para el café de cada día</p>
+                <p class="mt-6">
+                  <span class="font-display text-4xl font-semibold">22,90 €</span>
+                  <span class="text-cafe-500">/ mes</span>
+                </p>
+                <ul class="mt-6 space-y-3 text-cafe-700">
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    2 bolsas de 250 g al mes
+                  </li>
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    Tú eliges los orígenes
+                  </li>
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    Fichas de cata con cada envío
+                  </li>
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    Envío gratis
+                  </li>
+                </ul>
+                <a href="#planes" class="btn btn-primario mt-8">Elegir Popular</a>
+              </article>
+            </li>
+
+            <li>
+              <article class="flex flex-col rounded-3xl border border-crema-200 bg-white p-8">
+                <h3 class="text-2xl font-semibold">Pro</h3>
+                <p class="mt-1 text-cafe-500">Para casas muy cafeteras</p>
+                <p class="mt-6">
+                  <span class="font-display text-4xl font-semibold">39,90 €</span>
+                  <span class="text-cafe-500">/ mes</span>
+                </p>
+                <ul class="mt-6 space-y-3 text-cafe-700">
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    4 bolsas de 250 g al mes
+                  </li>
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    Microlotes y ediciones limitadas
+                  </li>
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    Envío gratis
+                  </li>
+                </ul>
+                <a href="#planes" class="btn btn-secundario mt-8">Elegir Pro</a>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section id="faq" class="scroll-mt-16 bg-white py-20" aria-labelledby="faq-titulo">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6">
+          <h2 id="faq-titulo" class="text-center text-3xl font-semibold sm:text-4xl">Preguntas frecuentes</h2>
+
+          <div class="mt-12 divide-y divide-crema-200 border-y border-crema-200">
+            <details name="faq" class="group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                ¿Puedo cancelar cuando quiera?
+                <svg class="size-5 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </summary>
+              <p class="pb-5 text-cafe-700">
+                Sí. No hay permanencia: puedes pausar o cancelar tu suscripción desde tu cuenta en cualquier
+                momento, y no te cobraremos el siguiente envío.
+              </p>
+            </details>
+
+            <details name="faq" class="group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                ¿Lo enviáis molido o en grano?
+                <svg class="size-5 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </summary>
+              <p class="pb-5 text-cafe-700">
+                Como prefieras. Te recomendamos el grano para conservar mejor el aroma, pero si no tienes
+                molinillo lo molemos para tu método: espresso, italiana, filtro o prensa francesa.
+              </p>
+            </details>
+
+            <details name="faq" class="group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                ¿Cuándo llega cada envío?
+                <svg class="size-5 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </summary>
+              <p class="pb-5 text-cafe-700">
+                Tostamos los lunes y enviamos entre el martes y el miércoles. En la península lo recibes en
+                24-48 horas.
+              </p>
+            </details>
+
+            <details name="faq" class="group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                ¿Cuánto tiempo aguanta el café fresco?
+                <svg class="size-5 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </summary>
+              <p class="pb-5 text-cafe-700">
+                Está en su mejor momento entre una y cinco semanas después del tueste. Guárdalo en su bolsa
+                cerrada, lejos de la luz y del calor (y mejor fuera de la nevera).
+              </p>
+            </details>
+
+            <details name="faq" class="group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                ¿Puedo regalar una suscripción?
+                <svg class="size-5 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </summary>
+              <p class="pb-5 text-cafe-700">
+                Claro. Puedes regalar 3, 6 o 12 meses de cualquier plan; la persona que lo recibe elige
+                cómo quiere su café.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ PIE ============ -->
+    <footer class="bg-cafe-900 text-crema-100">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:grid-cols-2 sm:px-6 lg:grid-cols-[2fr_1fr_1fr_2fr]">
+        <div>
+          <p class="flex items-center gap-2 font-display text-2xl font-semibold text-crema-50">
+            <svg class="size-7 text-tostado-500" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 2v2" />
+              <path d="M14 2v2" />
+              <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
+              <path d="M6 2v2" />
+            </svg>
+            Tueste
+          </p>
+          <p class="mt-4 max-w-[35ch] text-crema-200">Pequeño tostadero de café de especialidad. Tostamos poco, tostamos a menudo.</p>
+          <ul class="mt-6 flex flex-wrap gap-3" aria-label="Redes sociales">
+            <li><a href="#" class="block rounded-full border border-crema-200/30 px-4 py-2 text-sm hover:bg-crema-50/10">Instagram</a></li>
+            <li><a href="#" class="block rounded-full border border-crema-200/30 px-4 py-2 text-sm hover:bg-crema-50/10">TikTok</a></li>
+            <li><a href="#" class="block rounded-full border border-crema-200/30 px-4 py-2 text-sm hover:bg-crema-50/10">YouTube</a></li>
+          </ul>
+        </div>
+
+        <nav aria-labelledby="footer-tienda">
+          <h2 id="footer-tienda" class="font-sans text-sm font-semibold tracking-widest text-crema-50 uppercase">Tienda</h2>
+          <ul class="mt-4 space-y-3 text-crema-200">
+            <li><a href="#cafes" class="hover:text-crema-50">Cafés del mes</a></li>
+            <li><a href="#planes" class="hover:text-crema-50">Suscripciones</a></li>
+            <li><a href="#" class="hover:text-crema-50">Tarjetas regalo</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="footer-ayuda">
+          <h2 id="footer-ayuda" class="font-sans text-sm font-semibold tracking-widest text-crema-50 uppercase">Ayuda</h2>
+          <ul class="mt-4 space-y-3 text-crema-200">
+            <li><a href="#faq" class="hover:text-crema-50">Preguntas frecuentes</a></li>
+            <li><a href="#" class="hover:text-crema-50">Envíos</a></li>
+            <li><a href="#" class="hover:text-crema-50">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h2 class="font-sans text-sm font-semibold tracking-widest text-crema-50 uppercase">Newsletter</h2>
+          <form id="newsletter" class="mt-4">
+            <label for="newsletter-email" class="text-crema-200">Novedades y lotes nuevos, una vez al mes.</label>
+            <div class="mt-3 flex gap-2">
+              <input
+                id="newsletter-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                placeholder="tucorreo@ejemplo.com"
+                class="min-w-0 flex-1 rounded-full border border-crema-200/30 bg-crema-50/10 px-4 py-2 text-crema-50 placeholder:text-crema-200/60"
+              />
+              <button type="submit" class="btn btn-primario px-5 py-2 focus-visible:outline-crema-100">OK</button>
+            </div>
+            <p id="newsletter-status" class="mt-3 text-sm text-crema-200" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+
+      <div class="border-t border-crema-200/20">
+        <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-crema-200 sm:flex-row sm:justify-between sm:px-6">
+          <p>© 2026 Tueste · Proyecto ficticio de práctica.</p>
+          <p>Fotos de <a href="https://unsplash.com" class="underline hover:text-crema-50">Unsplash</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
