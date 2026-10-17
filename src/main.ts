@@ -29,6 +29,10 @@ const newsletterStatus = document.querySelector<HTMLParagraphElement>("#newslett
 
 newsletter?.addEventListener("submit", (event) => {
   event.preventDefault();
+  // Bloqueamos el formulario para que se vea el estado disabled: de los campos.
+  newsletter.querySelectorAll<HTMLInputElement | HTMLButtonElement>("input, button").forEach((field) => {
+    field.disabled = true;
+  });
   if (newsletterStatus) {
     newsletterStatus.textContent = "Esto es una demo: no hemos guardado tu email.";
   }

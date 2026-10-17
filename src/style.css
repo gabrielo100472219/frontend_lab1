@@ -21,6 +21,20 @@
   --color-tostado-700: #92400e;
 
   --font-display: "Fraunces", Georgia, serif;
+
+  /* Genera la utilidad animate-aparecer (entrada del hero). */
+  --animate-aparecer: aparecer 0.6s ease-out both;
+
+  @keyframes aparecer {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 /* Dentro de capas, para que cualquier utilidad del HTML pueda sobrescribirlas (lección 16). */
@@ -39,11 +53,11 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold transition-colors motion-reduce:transition-none;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold transition duration-200 ease-out motion-safe:hover:-translate-y-0.5;
   }
 
   .btn-primario {
-    @apply bg-tostado-600 text-white hover:bg-tostado-700 focus-visible:outline-tostado-600;
+    @apply bg-tostado-600 text-white hover:bg-tostado-700 hover:shadow-lg focus-visible:outline-tostado-600 disabled:pointer-events-none disabled:opacity-50;
   }
 
   .btn-secundario {
