@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es" data-theme="espresso">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi suscripción · Tueste</title>
+    <meta name="description" content="Panel de cliente de Tueste: tu plan, el próximo envío y el historial de cafés." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script src="/tema-inicial.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
+    />
+  </head>
+  <body class="bg-fondo-50 text-texto-900 antialiased">
+    <!-- D5 · layout-panel es una utilidad propia (src/style.css) con grid-template-areas.
+         La página mide 100dvh y no hace scroll: solo el <main> (overflow-y-auto). -->
+    <div class="layout-panel">
+      <header class="flex h-16 items-center justify-between gap-4 border-b border-fondo-200 bg-superficie px-4 [grid-area:cabecera] sm:px-6">
+        <a href="/" class="flex items-center gap-2 font-display text-xl font-semibold">
+          <svg class="size-6 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 2v2" />
+            <path d="M14 2v2" />
+            <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
+            <path d="M6 2v2" />
+          </svg>
+          Tueste
+          <span class="font-sans text-sm font-normal text-texto-500">· Mi cuenta</span>
+        </a>
+
+        <div class="flex items-center gap-2">
+          <button id="boton-oscuro" type="button" aria-pressed="false" class="grid size-10 place-items-center rounded-full hover:bg-fondo-100">
+            <span class="sr-only">Modo oscuro</span>
+            <svg class="size-5 dark:hidden" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+            <svg class="hidden size-5 dark:block" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41M17.66 6.34l1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41" /></svg>
+          </button>
+          <p class="flex items-center gap-2">
+            <span class="grid size-9 place-items-center rounded-full bg-marca-900 text-sm font-semibold text-claro-50" aria-hidden="true">AG</span>
+            <span class="hidden text-sm font-medium sm:inline">Ana García</span>
+          </p>
+        </div>
+      </header>
+
+      <!-- En móvil la barra lateral pasa arriba y se desplaza en horizontal. -->
+      <nav aria-label="Panel" class="overflow-x-auto border-b border-fondo-200 bg-superficie [grid-area:lateral] md:border-r md:border-b-0">
+        <ul class="flex gap-1 p-2 md:flex-col md:p-4">
+          <li><a href="#resumen" aria-current="page" class="flex items-center gap-3 rounded-xl px-3 py-2 whitespace-nowrap hover:bg-fondo-100 aria-[current=page]:bg-fondo-100 aria-[current=page]:font-semibold aria-[current=page]:text-acento-700">Resumen</a></li>
+          <li><a href="#envios" class="flex items-center gap-3 rounded-xl px-3 py-2 whitespace-nowrap hover:bg-fondo-100 aria-[current=page]:bg-fondo-100 aria-[current=page]:font-semibold">Envíos</a></li>
+          <li><a href="#" class="flex items-center gap-3 rounded-xl px-3 py-2 whitespace-nowrap hover:bg-fondo-100 aria-[current=page]:bg-fondo-100 aria-[current=page]:font-semibold">Mis cafés</a></li>
+          <li><a href="#" class="flex items-center gap-3 rounded-xl px-3 py-2 whitespace-nowrap hover:bg-fondo-100 aria-[current=page]:bg-fondo-100 aria-[current=page]:font-semibold">Pagos</a></li>
+          <li><a href="#" class="flex items-center gap-3 rounded-xl px-3 py-2 whitespace-nowrap hover:bg-fondo-100 aria-[current=page]:bg-fondo-100 aria-[current=page]:font-semibold">Ajustes</a></li>
+          <li class="md:mt-4 md:border-t md:border-fondo-200 md:pt-4"><a href="/" class="flex items-center gap-3 rounded-xl px-3 py-2 whitespace-nowrap text-texto-700 hover:bg-fondo-100">← Volver a la tienda</a></li>
+        </ul>
+      </nav>
+
+      <main id="resumen" class="relative overflow-y-auto p-4 [grid-area:contenido] sm:p-8">
+        <div class="mx-auto max-w-5xl">
+          <h1 class="text-3xl font-semibold">Hola, Ana</h1>
+          <p class="mt-1 text-texto-700">Este es el resumen de tu suscripción. <span class="text-texto-500">(Datos ficticios de demostración.)</span></p>
+
+          <section aria-labelledby="estadisticas-titulo" class="mt-8">
+            <h2 id="estadisticas-titulo" class="sr-only">Estadísticas</h2>
+            <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <li class="rounded-2xl border border-fondo-200 bg-superficie p-5">
+                <p class="text-sm text-texto-500">Plan actual</p>
+                <p class="mt-2 font-display text-2xl font-semibold">Popular</p>
+                <p class="mt-1 text-sm text-texto-700">22,90 € / mes</p>
+              </li>
+              <li class="rounded-2xl border border-fondo-200 bg-superficie p-5">
+                <p class="text-sm text-texto-500">Próximo envío</p>
+                <p class="mt-2 font-display text-2xl font-semibold"><time datetime="2026-10-21">21 oct</time></p>
+                <p class="mt-1 text-sm text-texto-700">Etiopía + Guatemala</p>
+              </li>
+              <li class="rounded-2xl border border-fondo-200 bg-superficie p-5">
+                <p class="text-sm text-texto-500">Bolsas recibidas</p>
+                <p class="mt-2 font-display text-2xl font-semibold">14</p>
+                <p class="mt-1 text-sm text-texto-700">desde marzo de 2026</p>
+              </li>
+              <li class="rounded-2xl bg-acento-600 p-5 text-sobre-acento">
+                <p class="text-sm">Ahorro en envíos</p>
+                <p class="mt-2 font-display text-2xl font-semibold">62,30 €</p>
+                <p class="mt-1 text-sm">frente a comprar suelto</p>
+              </li>
+            </ul>
+          </section>
+
+          <section id="envios" aria-labelledby="envios-titulo" class="mt-10">
+            <div class="flex flex-wrap items-end justify-between gap-2">
+              <h2 id="envios-titulo" class="text-2xl font-semibold">Historial de envíos</h2>
+              <a href="#" class="text-sm font-semibold text-acento-600 hover:text-acento-700">Descargar facturas</a>
+            </div>
+
+            <!-- La tabla puede ser más ancha que la pantalla del móvil: scroll horizontal solo aquí. -->
+            <div class="mt-4 overflow-x-auto rounded-2xl border border-fondo-200 bg-superficie">
+              <table class="w-full min-w-[36rem] text-left text-sm">
+                <caption class="sr-only">Envíos de los últimos meses</caption>
+                <thead class="bg-fondo-100 text-texto-700">
+                  <tr>
+                    <th scope="col" class="px-4 py-3 font-semibold">Fecha</th>
+                    <th scope="col" class="px-4 py-3 font-semibold">Cafés</th>
+                    <th scope="col" class="px-4 py-3 font-semibold">Molienda</th>
+                    <th scope="col" class="px-4 py-3 font-semibold">Estado</th>
+                    <th scope="col" class="px-4 py-3 text-right font-semibold">Importe</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-fondo-200">
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-10-21">21 oct 2026</time></td>
+                    <td class="px-4 py-3">Etiopía, Guatemala</td>
+                    <td class="px-4 py-3">En grano</td>
+                    <td class="px-4 py-3"><span class="rounded-full border border-acento-600 px-2.5 py-0.5 text-xs font-semibold text-acento-600">Preparando</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">22,90 €</td>
+                  </tr>
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-09-23">23 sep 2026</time></td>
+                    <td class="px-4 py-3">Kenia, Colombia</td>
+                    <td class="px-4 py-3">En grano</td>
+                    <td class="px-4 py-3"><span class="rounded-full bg-fondo-100 px-2.5 py-0.5 text-xs font-semibold">Entregado</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">22,90 €</td>
+                  </tr>
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-08-19">19 ago 2026</time></td>
+                    <td class="px-4 py-3">Brasil, Ruanda</td>
+                    <td class="px-4 py-3">Italiana</td>
+                    <td class="px-4 py-3"><span class="rounded-full bg-fondo-100 px-2.5 py-0.5 text-xs font-semibold">Entregado</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">22,90 €</td>
+                  </tr>
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-07-22">22 jul 2026</time></td>
+                    <td class="px-4 py-3">Etiopía, Colombia</td>
+                    <td class="px-4 py-3">Filtro</td>
+                    <td class="px-4 py-3"><span class="rounded-full bg-fondo-100 px-2.5 py-0.5 text-xs font-semibold">Entregado</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">22,90 €</td>
+                  </tr>
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-06-17">17 jun 2026</time></td>
+                    <td class="px-4 py-3">Guatemala, Kenia</td>
+                    <td class="px-4 py-3">En grano</td>
+                    <td class="px-4 py-3"><span class="rounded-full bg-fondo-100 px-2.5 py-0.5 text-xs font-semibold">Entregado</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">22,90 €</td>
+                  </tr>
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-05-20">20 may 2026</time></td>
+                    <td class="px-4 py-3">Colombia</td>
+                    <td class="px-4 py-3">Italiana</td>
+                    <td class="px-4 py-3"><span class="rounded-full bg-fondo-100 px-2.5 py-0.5 text-xs font-semibold">Entregado</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">12,90 €</td>
+                  </tr>
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-04-22">22 abr 2026</time></td>
+                    <td class="px-4 py-3">Etiopía</td>
+                    <td class="px-4 py-3">Italiana</td>
+                    <td class="px-4 py-3"><span class="rounded-full bg-fondo-100 px-2.5 py-0.5 text-xs font-semibold">Entregado</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">12,90 €</td>
+                  </tr>
+                  <tr class="hover:bg-fondo-50">
+                    <td class="px-4 py-3"><time datetime="2026-03-18">18 mar 2026</time></td>
+                    <td class="px-4 py-3">Colombia</td>
+                    <td class="px-4 py-3">Italiana</td>
+                    <td class="px-4 py-3"><span class="rounded-full bg-fondo-100 px-2.5 py-0.5 text-xs font-semibold">Entregado</span></td>
+                    <td class="px-4 py-3 text-right tabular-nums">12,90 €</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section aria-labelledby="favoritos-titulo" class="mt-10 grid gap-4 lg:grid-cols-2">
+            <h2 id="favoritos-titulo" class="text-2xl font-semibold lg:col-span-2">Tus cafés más pedidos</h2>
+            <article class="flex items-center justify-between gap-4 rounded-2xl border border-fondo-200 bg-superficie p-5">
+              <div>
+                <h3 class="text-lg font-semibold">Etiopía · Yirgacheffe</h3>
+                <p class="text-sm text-texto-500">Pedido 4 veces · floral y cítrico</p>
+              </div>
+              <a href="/#cafes" class="btn btn-secundario px-4 py-2 text-sm">Ver<span class="sr-only"> Etiopía</span></a>
+            </article>
+            <article class="flex items-center justify-between gap-4 rounded-2xl border border-fondo-200 bg-superficie p-5">
+              <div>
+                <h3 class="text-lg font-semibold">Colombia · Huila</h3>
+                <p class="text-sm text-texto-500">Pedido 4 veces · caramelo y cacao</p>
+              </div>
+              <a href="/#cafes" class="btn btn-secundario px-4 py-2 text-sm">Ver<span class="sr-only"> Colombia</span></a>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
