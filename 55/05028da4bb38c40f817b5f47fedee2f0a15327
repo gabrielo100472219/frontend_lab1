@@ -1,0 +1,25 @@
+index.html
+  s_efbefe09aaf2f9::t_4fdefa1ad85d81 87-90,106,109,112,116,120,136,166,171,173-174,181,192,203-204,212-213,220,231,242-243,251-252,259,270,281-399,421,423,432,440,557,568,579,590,601,627,656,664-665,668-670
+public/robots.txt
+  s_efbefe09aaf2f9::t_80a99b408dcf04 1-2
+src/main.ts
+  s_efbefe09aaf2f9::t_7147cbef2e2d7a 32-35
+src/style.css
+  s_efbefe09aaf2f9::t_045140fadbc646 24-37,56,60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5505028da4bb38c40f817b5f47fedee2f0a15327",
+  "prompts": {},
+  "sessions": {
+    "s_efbefe09aaf2f9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4aa88c50-c077-4ae5-bf86-df2af0c5fa34",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
