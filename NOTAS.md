@@ -6,7 +6,9 @@ Chuleta para la revisión. Agrupada por concepto del módulo (el número es la l
 
 | Qué | Por qué |
 | --- | --- |
-| `@theme { --color-cafe-900: … }` | Variables CSS (05) que Tailwind convierte en utilidades: `bg-cafe-900`, `text-cafe-900`, `border-cafe-900`… Cambiar la paleta es tocar una línea. |
+| `@theme inline { --color-fondo-50: var(--fondo-50) … }` | Tokens semánticos (05): `fondo` (superficies), `superficie` (tarjetas), `texto`, `marca` (bandas oscuras), `claro` (texto sobre la marca), `acento` y `sobre-acento`. Con `inline`, la utilidad usa la variable directamente (`bg-fondo-50` → `background-color: var(--fondo-50)`), así que cambiar las variables cambia toda la página. |
+| `[data-theme="matcha"] { --acento-600: … }` | D3: cada tema solo redefine variables. El HTML no cambia, solo el atributo `data-theme` de `<html>`. |
+| `.dark { --fondo-50: … }` + `@custom-variant dark (&:where(.dark, .dark *))` | P1: el modo oscuro redefine superficies y texto (y aclara el acento para que contraste). La variante `dark:` pasa a depender de la clase `.dark`, que pone el botón, en vez de la preferencia del sistema. |
 | `@layer base { h1, h2, h3 { … } }` | Estilo base de los títulos (Preflight los deja como párrafos, 08). Va **dentro de una capa** para que cualquier utilidad del HTML lo pueda sobrescribir: lo que está fuera de capas gana a lo que está dentro (16, 22). Ejemplo: los `h2` del footer llevan `font-sans` y gana. |
 | `:focus-visible { outline-current }` | Foco visible para teclado en todo (12). `currentColor` = color del texto, que por definición contrasta con su fondo. |
 | `@layer components { .btn … }` | Los botones se repiten ~10 veces: clase propia con `@apply` (22, práctica 3). En la capa `components`, así `btn px-4 py-2` funciona: la utilidad (capa `utilities`) gana al componente. |
@@ -18,12 +20,13 @@ Chuleta para la revisión. Agrupada por concepto del módulo (el número es la l
 | --- | --- |
 | `sticky top-0` | Se queda pegada al hacer scroll (17). Sin `top` no hace nada. |
 | `z-20` | Por encima del contenido que pasa por debajo (18). Escala pequeña: header 20, enlace de salto 30. |
-| `bg-crema-50/90 backdrop-blur` | Fondo al 90 % de opacidad + desenfoque de lo que hay detrás. |
+| `bg-fondo-50/90 backdrop-blur` | Fondo al 90 % de opacidad + desenfoque de lo que hay detrás. |
 | `h-16` | Altura fija conocida (4rem) para poder restarla en el hero y en `scroll-mt-16`. |
-| `mx-auto max-w-6xl px-4` | Una caja centrada (06): `max-width` + margen automático. El `px-4` evita que el texto toque el borde en móvil. |
+| `contenedor` | Utilidad propia (D4, `@utility`): `margin-inline: auto` + `max-width` + padding lateral que crece en `sm`. Es la caja centrada del tema 06, que se repetía en todas las secciones. |
 | `flex items-center justify-between` | Logo a un lado, menú al otro, centrados en vertical (19, pasos 2-3). |
-| `peer` (botón) + `peer-aria-expanded:flex` (lista) | El JS solo cambia `aria-expanded`; la lista se muestra con un selector de hermano + atributo (10, 11): `.peer[aria-expanded="true"] ~ ul`. El estado accesible y el visual no se pueden desincronizar. |
-| `group` + `group-aria-expanded:hidden` | Igual, pero hacia los hijos: cambia el icono ☰ por ✕. |
+| `input type=checkbox` `peer sr-only` + `peer-checked:flex` (lista) | D1, menú **sin JS**: el checkbox guarda el estado abierto/cerrado; la lista es un hermano posterior y se muestra con `.peer:checked ~ ul` (10). El `label for` hace de botón. |
+| `peer-focus-visible:outline-2` (label) | El checkbox está oculto (`sr-only`), así que el foco se dibuja en su `label`. |
+| `group` (nav) + `group-has-checked:hidden` / `group-has-checked:block` | Los iconos ☰/✕ están **dentro** del label, no son hermanos del checkbox; por eso uso `:has()` (12): `.group:has(:checked) svg`. |
 | `hidden … md:flex` | Mobile first (21): oculto por defecto, en fila desde 48rem. |
 | `absolute inset-x-0 top-full` | En móvil el menú es un panel justo debajo de la cabecera. Su contenedor de referencia es el `header`, porque `sticky` también es un elemento posicionado (17). |
 | `md:static` | En escritorio vuelve al flujo normal. |
@@ -104,13 +107,13 @@ Chuleta para la revisión. Agrupada por concepto del módulo (el número es la l
 | `min-w-0 flex-1` (input) | Los items flex tienen `min-width: auto` y un `input` no se encoge por debajo de su ancho por defecto: sin `min-w-0` se sale en móvil. |
 | `<label for>` + `type="email" required` | Campo con etiqueta; el navegador valida el formato. |
 | `aria-live="polite"` | El aviso "esto es una demo" se anuncia en lectores de pantalla. |
-| `focus-visible:outline-crema-100` | Sobre fondo oscuro, el anillo naranja del botón no tendría contraste suficiente. |
+| `focus-visible:outline-claro-100` | Sobre fondo oscuro, el anillo naranja del botón no tendría contraste suficiente. |
 
 ## Formulario con estados (P5)
 
 | Clase | Por qué |
 | --- | --- |
-| `focus:border-tostado-500 focus:bg-crema-50/15` | El campo activo se distingue. |
+| `focus:border-acento-500 focus:bg-claro-50/15` | El campo activo se distingue. |
 | `user-invalid:border-red-300` | Borde rojo si el email no es válido. `user-invalid` y no `invalid`: solo después de que la persona haya tocado el campo, no nada más cargar la página (un campo `required` vacío ya es `:invalid`). |
 | `peer` (input) + `hidden peer-user-invalid:block` (mensaje) | El mensaje de error es un hermano posterior del input: `.peer:user-invalid ~ p` (10, hermanos siguientes). Sin JS. |
 | `flex-wrap` + `basis-full` (mensaje) | El mensaje tiene que ser hermano del input, así que vive dentro de la fila flex; `basis-full` lo manda a una línea propia. |
@@ -127,3 +130,55 @@ Chuleta para la revisión. Agrupada por concepto del módulo (el número es la l
 | `motion-safe:hover:-translate-y-0.5` (en `.btn`) | Los botones suben un poco al pasar el ratón. |
 | `motion-safe:transition-transform` (flecha del FAQ) | El giro se anima solo si no se ha pedido reducir movimiento; si se ha pedido, gira sin animación. |
 | `scroll-mt-16` (secciones) | Al saltar a `#planes`, deja 4rem arriba para que la cabecera fija no tape el título. |
+
+
+## Modo oscuro y temas (P1, D3)
+
+| Clase | Por qué |
+| --- | --- |
+| `dark:hidden` / `hidden dark:block` (iconos del botón) | Luna en modo claro, sol en modo oscuro, sin JS: solo la variante `dark:`. |
+| `dark:brightness-90` (fotos) | En modo oscuro las fotos claras deslumbran; las bajo un 10 %. |
+| `dark:shadow-black/40` | Una sombra marrón no se ve sobre fondo oscuro: en oscuro, negra. |
+| `aria-pressed` (botón de modo oscuro) | El lector de pantalla anuncia si está activado. |
+| `tema-inicial.js` en el `<head>` | Aplica el tema guardado **antes de pintar**; si no, se vería un instante el tema claro (parpadeo). |
+| `color-scheme: dark` (en `.dark`) | Los controles nativos (select, scrollbars) también se ponen oscuros. |
+
+## Tarjeta con container query (D2)
+
+| Clase | Por qué |
+| --- | --- |
+| `@container` (en el `li`) | Convierte el `li` en contenedor: sus hijos pueden preguntar por **su** ancho, no por el de la ventana. |
+| `@xl:flex-row` (article) | Si el contenedor mide 36rem o más, la tarjeta se pone en horizontal. |
+| `@xl:w-1/2 @xl:shrink-0` (imagen) / `@xl:h-full @xl:aspect-auto` | En horizontal, la imagen ocupa media tarjeta y toda la altura. |
+| `sm:col-span-2 lg:col-span-3` (tarjeta destacada) | La misma tarjeta, pero ocupando toda la fila: su contenedor es ancho y se pone en horizontal. Las otras seis, en columnas estrechas, siguen en vertical. Con una media query (`md:flex-row`) se pondrían **todas** en horizontal. |
+
+## Bento (P6)
+
+| Clase | Por qué |
+| --- | --- |
+| `lg:grid-cols-4 lg:auto-rows-[minmax(12rem,auto)]` | 4 columnas; las filas miden al menos 12rem y crecen si el contenido lo pide. |
+| `sm:col-span-2 lg:row-span-2` (caja grande) | Ocupa 2×2 celdas (20, paso 3). |
+| `sm:col-span-2` (bolsas compostables) | Ocupa dos columnas: con la grande (2×2) y las dos pequeñas, las 8 celdas quedan llenas. |
+| `relative isolate` + `absolute inset-0 -z-10` (foto y degradado) | Foto de fondo detrás del texto. `isolate` crea un contexto de apilamiento (18), así el `-z-10` no manda la foto detrás de la sección entera. |
+| `bg-linear-to-t from-marca-900 via-marca-900/60 to-transparent` | Degradado para que el texto blanco se lea sobre la foto. |
+
+## Utilidades propias (D4)
+
+| Utilidad | Por qué |
+| --- | --- |
+| `contenedor` | Ver cabecera. Admite variantes como cualquier utilidad. |
+| `titulo-seccion` | `text-3xl font-semibold sm:text-4xl`, que se repetía en todos los `h2`. |
+| `layout-panel` | Las áreas de grid del panel (D5), que con valores arbitrarios serían ilegibles. |
+
+## Panel (D5, `panel.html`)
+
+| Clase | Por qué |
+| --- | --- |
+| `layout-panel` | `display: grid` + `height: 100dvh` + `grid-template-areas`. Móvil: `"cabecera" "lateral" "contenido"`; desde `md`: `"cabecera cabecera" "lateral contenido"`. |
+| `[grid-area:cabecera]` / `[grid-area:lateral]` / `[grid-area:contenido]` | Propiedad arbitraria: cada hijo dice en qué zona va. |
+| `minmax(0, 1fr)` (fila del contenido) | Sin el `0`, la fila crecería con su contenido y se perdería el scroll interno. |
+| `overflow-y-auto` (main) | Solo el contenido hace scroll; cabecera y barra lateral se quedan quietas. |
+| `relative` (main) | Los elementos `sr-only` son `absolute`: sin un padre posicionado se colocaban respecto a la página y la alargaban (la página entera hacía scroll). |
+| `overflow-x-auto` (nav en móvil, tabla) | La barra lateral pasa arriba y se desliza en horizontal; la tabla, si no cabe, también. |
+| `aria-current="page"` + `aria-[current=page]:bg-fondo-100` | La sección activa se marca para lectores de pantalla y se estiliza con un selector de atributo (11). |
+| `tabular-nums` | Cifras del mismo ancho: los importes quedan alineados. |
