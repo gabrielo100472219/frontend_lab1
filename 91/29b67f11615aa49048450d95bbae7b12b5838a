@@ -1,0 +1,29 @@
+.gitignore
+  s_efbefe09aaf2f9::t_baee5e699f49d2 1-24
+.npmrc
+  s_efbefe09aaf2f9::t_6188a9baa7774f 1
+package-lock.json
+  s_efbefe09aaf2f9::t_ef53d4165cc79c 1-1634
+package.json
+  s_efbefe09aaf2f9::t_162d724944c3af 1-19
+tsconfig.json
+  s_efbefe09aaf2f9::t_6960c825de95af 1-26
+vite.config.ts
+  s_efbefe09aaf2f9::t_411851760a69a6 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9129b67f11615aa49048450d95bbae7b12b5838a",
+  "prompts": {},
+  "sessions": {
+    "s_efbefe09aaf2f9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4aa88c50-c077-4ae5-bf86-df2af0c5fa34",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
