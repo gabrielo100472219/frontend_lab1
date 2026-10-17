@@ -49,10 +49,14 @@ Chuleta para la revisión. Agrupada por concepto del módulo (el número es la l
 | Clase | Por qué |
 | --- | --- |
 | `ul > li > article` | Lista de productos; cada tarjeta tiene sentido sola (01). |
-| `grid sm:grid-cols-2 lg:grid-cols-3` | 1 → 2 → 3 columnas. |
+| `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` | 6 tarjetas: 1 → 2 → 3 columnas (mobile first, 21). `grid-cols-1` es el valor por defecto, pero lo dejamos explícito. |
 | `flex h-full flex-col` (article) | La tarjeta ocupa toda la celda y apila su contenido en columna. |
 | `flex-1` (cuerpo) + `mt-auto` (precio) | El margen automático empuja el precio al fondo: los precios quedan alineados aunque el texto mida distinto (19, paso 7). |
 | `overflow-hidden rounded-2xl` | La imagen respeta las esquinas redondeadas. |
+| `transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1` | Al pasar el ratón la tarjeta sube 0.25rem y gana sombra. El desplazamiento es movimiento, por eso va con `motion-safe:`; la sombra no lo necesita. |
+| `group` (tarjeta) + `motion-safe:group-hover:scale-105` (imagen) | Zoom de la foto al pasar por **cualquier parte** de la tarjeta. El contenedor de la imagen lleva `overflow-hidden` para que la foto ampliada no se salga. |
+| `aspect-3/2 object-cover` | Todas las fotos con el mismo alto sin deformarse. |
+| `btn btn-primario px-4 py-2 text-sm` | El botón de la tarjeta: componente `.btn` + utilidades que lo hacen más pequeño (las utilidades ganan a la capa `components`). |
 | `flex flex-wrap gap-2` (notas) | Las etiquetas de cata saltan de línea solas. |
 | `alt=""` | Fotos decorativas: la información está en el texto (01). |
 | `loading="lazy"` | Solo se descargan al acercarse a la pantalla. |
@@ -62,7 +66,9 @@ Chuleta para la revisión. Agrupada por concepto del módulo (el número es la l
 | Clase | Por qué |
 | --- | --- |
 | `ol` | Los pasos tienen orden: lista ordenada (01). |
-| `grid md:grid-cols-3` | Apilados en móvil, en fila en escritorio. |
+| `flex flex-col md:flex-row` | Apilados en móvil, en fila en escritorio (19). Es una sola dirección, así que flex basta. |
+| `flex-1` (cada paso) | Los tres pasos se reparten el ancho a partes iguales (`flex: 1 1 0%`). La línea de unión depende de que midan lo mismo. |
+| `flex flex-col items-center justify-center text-center` | El centrado de flexbox (19, paso 3) dentro de cada paso. |
 | `grid size-14 place-items-center rounded-full` | Círculo con el número centrado en los dos ejes (20). |
 | `md:after:absolute md:after:top-7 …` | La línea entre pasos es un pseudo-elemento `::after` (14) posicionado respecto al `li relative`. `top-7` = mitad del círculo (3.5rem / 2). |
 | `md:after:left-[calc(50%+2.25rem)] md:after:w-[calc(100%-2rem)]` | Empieza justo después del círculo (mitad del `li` + radio + aire) y mide lo justo para llegar al siguiente (ancho del `li` + hueco de 2.5rem − 2 radios − aire). El último paso no lleva línea. |
@@ -100,10 +106,24 @@ Chuleta para la revisión. Agrupada por concepto del módulo (el número es la l
 | `aria-live="polite"` | El aviso "esto es una demo" se anuncia en lectores de pantalla. |
 | `focus-visible:outline-crema-100` | Sobre fondo oscuro, el anillo naranja del botón no tendría contraste suficiente. |
 
+## Formulario con estados (P5)
+
+| Clase | Por qué |
+| --- | --- |
+| `focus:border-tostado-500 focus:bg-crema-50/15` | El campo activo se distingue. |
+| `user-invalid:border-red-300` | Borde rojo si el email no es válido. `user-invalid` y no `invalid`: solo después de que la persona haya tocado el campo, no nada más cargar la página (un campo `required` vacío ya es `:invalid`). |
+| `peer` (input) + `hidden peer-user-invalid:block` (mensaje) | El mensaje de error es un hermano posterior del input: `.peer:user-invalid ~ p` (10, hermanos siguientes). Sin JS. |
+| `flex-wrap` + `basis-full` (mensaje) | El mensaje tiene que ser hermano del input, así que vive dentro de la fila flex; `basis-full` lo manda a una línea propia. |
+| `aria-describedby="newsletter-error"` | El lector de pantalla lee el mensaje de error asociado al campo. |
+| `disabled:opacity-50 disabled:cursor-not-allowed` | Tras enviar (demo), el JS desactiva campo y botón y se ve el estado. |
+
 ## Movimiento
 
 | Clase | Por qué |
 | --- | --- |
 | `motion-safe:scroll-smooth` (html) | Scroll suave a las anclas solo si la persona no ha pedido reducir el movimiento (21). |
-| `motion-reduce:transition-none` | Lo mismo para transiciones. |
+| `--animate-aparecer` + `@keyframes` en `@theme` | Animación propia (P7): genera la clase `animate-aparecer` (sube 1rem y aparece). |
+| `motion-safe:animate-aparecer motion-safe:[animation-delay:200ms]` | Entrada del hero en cascada: cada bloque empieza un poco más tarde. Todo con `motion-safe:`. |
+| `motion-safe:hover:-translate-y-0.5` (en `.btn`) | Los botones suben un poco al pasar el ratón. |
+| `motion-safe:transition-transform` (flecha del FAQ) | El giro se anima solo si no se ha pedido reducir movimiento; si se ha pedido, gira sin animación. |
 | `scroll-mt-16` (secciones) | Al saltar a `#planes`, deja 4rem arriba para que la cabecera fija no tape el título. |
