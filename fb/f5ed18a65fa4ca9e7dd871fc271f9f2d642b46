@@ -1,0 +1,25 @@
+index.html
+  s_efbefe09aaf2f9::t_87057297882612 1-566
+public/favicon.svg
+  s_efbefe09aaf2f9::t_31c5b7b0c26b43 1
+src/main.ts
+  s_efbefe09aaf2f9::t_bd6490048fac58 1-35
+src/style.css
+  s_efbefe09aaf2f9::t_1443caa2503ed4 1-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fbf5ed18a65fa4ca9e7dd871fc271f9f2d642b46",
+  "prompts": {},
+  "sessions": {
+    "s_efbefe09aaf2f9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4aa88c50-c077-4ae5-bf86-df2af0c5fa34",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
