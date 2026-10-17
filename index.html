@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" class="motion-safe:scroll-smooth">
+<html lang="es" data-theme="espresso" class="motion-safe:scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,8 @@
       content="Tueste es un pequeño tostadero de café de especialidad. Elige tu plan y recibe cada mes café recién tostado en casa."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Aplica el tema guardado antes de pintar la página (evita un parpadeo del tema claro). -->
+    <script src="/tema-inicial.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,20 +18,20 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
     />
   </head>
-  <body class="bg-crema-50 text-cafe-900 antialiased">
+  <body class="bg-fondo-50 text-texto-900 antialiased">
     <a
       href="#contenido"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-30 focus:rounded-full focus:bg-cafe-900 focus:px-4 focus:py-2 focus:text-crema-50 focus-visible:outline-cafe-900"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-30 focus:rounded-full focus:bg-marca-900 focus:px-4 focus:py-2 focus:text-claro-50 focus-visible:outline-texto-900"
     >
       Saltar al contenido
     </a>
 
     <!-- ============ CABECERA ============ -->
-    <header class="sticky top-0 z-20 border-b border-crema-200 bg-crema-50/90 backdrop-blur">
-      <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+    <header class="sticky top-0 z-20 border-b border-fondo-200 bg-fondo-50/90 backdrop-blur">
+      <div class="contenedor flex h-16 items-center justify-between gap-4">
         <a href="#inicio" class="flex items-center gap-2 font-display text-2xl font-semibold">
           <svg
-            class="size-7 text-tostado-600"
+            class="size-7 text-acento-600"
             aria-hidden="true"
             viewBox="0 0 24 24"
             fill="none"
@@ -46,18 +48,18 @@
           Tueste
         </a>
 
-        <div class="flex items-center gap-2 md:gap-6">
-          <nav aria-label="Principal">
-            <button
-              id="menu-button"
-              type="button"
-              class="peer group grid size-10 place-items-center rounded-full hover:bg-crema-100 md:hidden"
-              aria-expanded="false"
-              aria-controls="menu"
+        <div class="flex items-center gap-1 sm:gap-2 md:gap-4">
+          <!-- D1 · Menú hamburguesa sin JS: checkbox + label. La lista se muestra con
+               peer-checked: (hermano siguiente) y los iconos cambian con group-has-checked:. -->
+          <nav aria-label="Principal" class="group">
+            <input id="menu-toggle" type="checkbox" class="peer sr-only md:hidden" />
+            <label
+              for="menu-toggle"
+              class="grid size-10 cursor-pointer place-items-center rounded-full hover:bg-fondo-100 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-current md:hidden"
             >
-              <span class="sr-only">Abrir menú</span>
+              <span class="sr-only">Menú</span>
               <svg
-                class="size-6 group-aria-expanded:hidden"
+                class="size-6 group-has-checked:hidden"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -68,7 +70,7 @@
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
               <svg
-                class="hidden size-6 group-aria-expanded:block"
+                class="hidden size-6 group-has-checked:block"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -78,18 +80,31 @@
               >
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
-            </button>
+            </label>
 
             <ul
               id="menu"
-              class="absolute inset-x-0 top-full hidden flex-col gap-1 border-b border-crema-200 bg-crema-50 px-4 py-4 shadow-lg peer-aria-expanded:flex md:static md:flex md:flex-row md:gap-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none"
+              class="absolute inset-x-0 top-full hidden flex-col gap-1 border-b border-fondo-200 bg-fondo-50 px-4 py-4 shadow-lg peer-checked:flex md:static md:flex md:flex-row md:gap-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none"
             >
-              <li><a href="#cafes" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600 focus-visible:outline-tostado-600">Cafés</a></li>
-              <li><a href="#como-funciona" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600 focus-visible:outline-tostado-600">Cómo funciona</a></li>
-              <li><a href="#planes" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600 focus-visible:outline-tostado-600">Planes</a></li>
-              <li><a href="#faq" class="block rounded-lg px-3 py-2 font-medium hover:bg-crema-100 md:p-0 md:hover:bg-transparent md:hover:text-tostado-600 focus-visible:outline-tostado-600">FAQ</a></li>
+              <li><a href="#cafes" class="block rounded-lg px-3 py-2 font-medium hover:bg-fondo-100 md:p-0 md:hover:bg-transparent md:hover:text-acento-600 focus-visible:outline-acento-600">Cafés</a></li>
+              <li><a href="#como-funciona" class="block rounded-lg px-3 py-2 font-medium hover:bg-fondo-100 md:p-0 md:hover:bg-transparent md:hover:text-acento-600 focus-visible:outline-acento-600">Cómo funciona</a></li>
+              <li><a href="#planes" class="block rounded-lg px-3 py-2 font-medium hover:bg-fondo-100 md:p-0 md:hover:bg-transparent md:hover:text-acento-600 focus-visible:outline-acento-600">Planes</a></li>
+              <li><a href="#faq" class="block rounded-lg px-3 py-2 font-medium hover:bg-fondo-100 md:p-0 md:hover:bg-transparent md:hover:text-acento-600 focus-visible:outline-acento-600">FAQ</a></li>
+              <li><a href="/panel.html" class="block rounded-lg px-3 py-2 font-medium hover:bg-fondo-100 md:p-0 md:hover:bg-transparent md:hover:text-acento-600 focus-visible:outline-acento-600">Mi cuenta</a></li>
             </ul>
           </nav>
+
+          <!-- P1 · Botón de modo oscuro: los iconos cambian solo con dark:, sin JS. -->
+          <button
+            id="boton-oscuro"
+            type="button"
+            aria-pressed="false"
+            class="grid size-10 place-items-center rounded-full hover:bg-fondo-100"
+          >
+            <span class="sr-only">Modo oscuro</span>
+            <svg class="size-5 dark:hidden" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+            <svg class="hidden size-5 dark:block" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41M17.66 6.34l1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41" /></svg>
+          </button>
 
           <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">Suscríbete</a>
         </div>
@@ -100,16 +115,16 @@
       <!-- ============ HERO ============ -->
       <section
         id="inicio"
-        class="mx-auto grid max-w-6xl scroll-mt-16 items-center gap-12 px-4 py-12 sm:px-6 md:min-h-[calc(100dvh-4rem)] md:grid-cols-2 md:py-16"
+        class="contenedor grid scroll-mt-16 items-center gap-12 py-12 md:min-h-[calc(100dvh-4rem)] md:grid-cols-2 md:py-16"
       >
         <div>
-          <p class="text-sm font-semibold tracking-widest text-tostado-600 uppercase motion-safe:animate-aparecer">
+          <p class="text-sm font-semibold tracking-widest text-acento-600 uppercase motion-safe:animate-aparecer">
             Tostado en pequeños lotes
           </p>
           <h1 class="mt-4 text-4xl leading-tight font-semibold sm:text-5xl lg:text-6xl motion-safe:animate-aparecer motion-safe:[animation-delay:100ms]">
             Café recién tostado, en tu puerta cada mes.
           </h1>
-          <p class="mt-6 max-w-[45ch] text-lg text-cafe-700 motion-safe:animate-aparecer motion-safe:[animation-delay:200ms]">
+          <p class="mt-6 max-w-[45ch] text-lg text-texto-700 motion-safe:animate-aparecer motion-safe:[animation-delay:200ms]">
             Seleccionamos granos de pequeños productores de Etiopía, Colombia o Kenia, los tostamos
             la semana del envío y te los mandamos a casa. Tú solo tienes que moler y disfrutar.
           </p>
@@ -117,17 +132,17 @@
             <a href="#planes" class="btn btn-primario">Suscríbete</a>
             <a href="#cafes" class="btn btn-secundario">Ver cafés</a>
           </div>
-          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cafe-700 motion-safe:animate-aparecer motion-safe:[animation-delay:400ms]">
+          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-texto-700 motion-safe:animate-aparecer motion-safe:[animation-delay:400ms]">
             <li class="flex items-center gap-2">
-              <svg class="size-4 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              <svg class="size-4 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               Envío gratis
             </li>
             <li class="flex items-center gap-2">
-              <svg class="size-4 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              <svg class="size-4 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               Cancela cuando quieras
             </li>
             <li class="flex items-center gap-2">
-              <svg class="size-4 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              <svg class="size-4 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               En grano o molido
             </li>
           </ul>
@@ -146,59 +161,102 @@
             width="900"
             height="1125"
             fetchpriority="high"
-            class="aspect-4/5 w-full rounded-3xl object-cover shadow-xl md:max-h-[75dvh]"
+            class="aspect-4/5 w-full rounded-3xl object-cover shadow-xl md:max-h-[75dvh] dark:brightness-90 dark:shadow-black/40"
           />
           <figcaption
-            class="absolute -bottom-5 left-4 rounded-2xl bg-white px-5 py-3 shadow-lg sm:left-auto sm:-right-4"
+            class="absolute -bottom-5 left-4 rounded-2xl bg-superficie px-5 py-3 shadow-lg sm:left-auto sm:-right-4"
           >
-            <span class="block text-xs tracking-wide text-cafe-500 uppercase">Último tueste</span>
+            <span class="block text-xs tracking-wide text-texto-500 uppercase">Último tueste</span>
             <span class="font-display text-lg font-semibold">Hace 3 días</span>
           </figcaption>
         </figure>
       </section>
 
       <!-- ============ CAFÉS DEL MES ============ -->
-      <section id="cafes" class="scroll-mt-16 bg-white py-20" aria-labelledby="cafes-titulo">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <section id="cafes" class="scroll-mt-16 bg-superficie py-20" aria-labelledby="cafes-titulo">
+        <div class="contenedor">
           <div class="max-w-2xl">
-            <h2 id="cafes-titulo" class="text-3xl font-semibold sm:text-4xl">Cafés del mes</h2>
-            <p class="mt-4 text-lg text-cafe-700">
-              Seis orígenes, seis formas de entender el café. Cambiamos la selección cada mes según la
+            <h2 id="cafes-titulo" class="titulo-seccion">Cafés del mes</h2>
+            <p class="mt-4 text-lg text-texto-700">
+              Un microlote de edición limitada y seis orígenes para todos los días. Cambiamos la selección cada mes según la
               temporada de cosecha.
             </p>
           </div>
 
           <ul class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <li>
-              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1">
-                <div class="relative overflow-hidden">
+            <!-- D2 · La misma tarjeta, pero ocupando toda la fila: su contenedor es ancho
+                 y la container query (@xl:flex-row) la pone en horizontal. -->
+            <li class="@container sm:col-span-2 lg:col-span-3">
+              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-fondo-200 bg-fondo-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1 @xl:flex-row dark:shadow-black/40">
+                <div class="relative overflow-hidden @xl:w-1/2 @xl:shrink-0">
+                  <img
+                    src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=900&h=600&q=75&auto=format&fit=crop"
+                    alt=""
+                    width="900"
+                    height="600"
+                    loading="lazy"
+                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105 @xl:h-full @xl:aspect-auto dark:brightness-90"
+                  />
+                  <span class="absolute top-3 left-3 rounded-full bg-acento-600 px-3 py-1 text-xs font-semibold text-sobre-acento">
+                    Edición limitada
+                  </span>
+                </div>
+                <div class="flex flex-1 flex-col gap-4 p-6 @xl:p-8">
+                  <div>
+                    <h3 class="text-2xl font-semibold @xl:text-3xl">Panamá Geisha</h3>
+                    <p class="text-sm text-texto-500">Boquete · 1.700 m · Natural · Tueste claro</p>
+                  </div>
+                  <ul class="flex flex-wrap gap-2 text-sm">
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Flor de azahar</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Mango</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Té de jazmín</li>
+                  </ul>
+                  <p class="text-texto-700">
+                    Nuestro microlote del mes: solo 40 bolsas. Una variedad muy aromática, casi como un té,
+                    que merece una preparación en filtro y un momento tranquilo.
+                  </p>
+                  <div class="mt-auto flex items-center justify-between border-t border-fondo-200 pt-4">
+                    <p>
+                      <span class="font-display text-2xl font-semibold">24,90 €</span>
+                      <span class="text-sm text-texto-500">/ 150 g</span>
+                    </p>
+                    <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">
+                      Elegir<span class="sr-only"> Panamá Geisha</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </li>
+            <li class="@container">
+              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-fondo-200 bg-fondo-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1 @xl:flex-row dark:shadow-black/40">
+                <div class="relative overflow-hidden @xl:w-1/2 @xl:shrink-0">
                   <img
                     src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&q=75&auto=format&fit=crop"
                     alt=""
                     width="600"
                     height="400"
                     loading="lazy"
-                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105 @xl:h-full @xl:aspect-auto dark:brightness-90"
                   />
-                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                  <span class="absolute top-3 left-3 rounded-full bg-superficie/90 px-3 py-1 text-xs font-semibold">
                     Tueste claro
                   </span>
                 </div>
-                <div class="flex flex-1 flex-col gap-4 p-6">
+                <div class="flex flex-1 flex-col gap-4 p-6 @xl:p-8">
                   <div>
                     <h3 class="text-2xl font-semibold">Etiopía</h3>
-                    <p class="text-sm text-cafe-500">Yirgacheffe · 2.000 m · Lavado</p>
+                    <p class="text-sm text-texto-500">Yirgacheffe · 2.000 m · Lavado</p>
                   </div>
                   <ul class="flex flex-wrap gap-2 text-sm">
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Jazmín</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Bergamota</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Melocotón</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Jazmín</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Bergamota</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Melocotón</li>
                   </ul>
-                  <p class="text-cafe-700">Floral y delicado, con una acidez cítrica muy limpia. Ideal en filtro.</p>
-                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                  <p class="text-texto-700">Floral y delicado, con una acidez cítrica muy limpia. Ideal en filtro.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-fondo-200 pt-4">
                     <p>
                       <span class="font-display text-2xl font-semibold">14,90 €</span>
-                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                      <span class="text-sm text-texto-500">/ 250 g</span>
                     </p>
                     <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">
                       Elegir<span class="sr-only"> Etiopía</span>
@@ -208,36 +266,36 @@
               </article>
             </li>
 
-            <li>
-              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1">
-                <div class="relative overflow-hidden">
+            <li class="@container">
+              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-fondo-200 bg-fondo-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1 @xl:flex-row dark:shadow-black/40">
+                <div class="relative overflow-hidden @xl:w-1/2 @xl:shrink-0">
                   <img
                     src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=600&h=400&q=75&auto=format&fit=crop"
                     alt=""
                     width="600"
                     height="400"
                     loading="lazy"
-                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105 @xl:h-full @xl:aspect-auto dark:brightness-90"
                   />
-                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                  <span class="absolute top-3 left-3 rounded-full bg-superficie/90 px-3 py-1 text-xs font-semibold">
                     Tueste medio
                   </span>
                 </div>
-                <div class="flex flex-1 flex-col gap-4 p-6">
+                <div class="flex flex-1 flex-col gap-4 p-6 @xl:p-8">
                   <div>
                     <h3 class="text-2xl font-semibold">Colombia</h3>
-                    <p class="text-sm text-cafe-500">Huila · 1.700 m · Lavado</p>
+                    <p class="text-sm text-texto-500">Huila · 1.700 m · Lavado</p>
                   </div>
                   <ul class="flex flex-wrap gap-2 text-sm">
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Caramelo</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Manzana roja</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Cacao</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Caramelo</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Manzana roja</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Cacao</li>
                   </ul>
-                  <p class="text-cafe-700">Dulce y redondo, el café de todos los días. Funciona en cualquier cafetera.</p>
-                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                  <p class="text-texto-700">Dulce y redondo, el café de todos los días. Funciona en cualquier cafetera.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-fondo-200 pt-4">
                     <p>
                       <span class="font-display text-2xl font-semibold">12,90 €</span>
-                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                      <span class="text-sm text-texto-500">/ 250 g</span>
                     </p>
                     <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">
                       Elegir<span class="sr-only"> Colombia</span>
@@ -247,36 +305,36 @@
               </article>
             </li>
 
-            <li>
-              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1">
-                <div class="relative overflow-hidden">
+            <li class="@container">
+              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-fondo-200 bg-fondo-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1 @xl:flex-row dark:shadow-black/40">
+                <div class="relative overflow-hidden @xl:w-1/2 @xl:shrink-0">
                   <img
                     src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=600&h=400&q=75&auto=format&fit=crop"
                     alt=""
                     width="600"
                     height="400"
                     loading="lazy"
-                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105 @xl:h-full @xl:aspect-auto dark:brightness-90"
                   />
-                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                  <span class="absolute top-3 left-3 rounded-full bg-superficie/90 px-3 py-1 text-xs font-semibold">
                     Tueste claro
                   </span>
                 </div>
-                <div class="flex flex-1 flex-col gap-4 p-6">
+                <div class="flex flex-1 flex-col gap-4 p-6 @xl:p-8">
                   <div>
                     <h3 class="text-2xl font-semibold">Kenia</h3>
-                    <p class="text-sm text-cafe-500">Nyeri AA · 1.800 m · Doble lavado</p>
+                    <p class="text-sm text-texto-500">Nyeri AA · 1.800 m · Doble lavado</p>
                   </div>
                   <ul class="flex flex-wrap gap-2 text-sm">
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Grosella negra</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Pomelo</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Frutos rojos</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Grosella negra</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Pomelo</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Frutos rojos</li>
                   </ul>
-                  <p class="text-cafe-700">Intenso y jugoso, con mucho cuerpo. Para quien busca un café con carácter.</p>
-                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                  <p class="text-texto-700">Intenso y jugoso, con mucho cuerpo. Para quien busca un café con carácter.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-fondo-200 pt-4">
                     <p>
                       <span class="font-display text-2xl font-semibold">15,50 €</span>
-                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                      <span class="text-sm text-texto-500">/ 250 g</span>
                     </p>
                     <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">
                       Elegir<span class="sr-only"> Kenia</span>
@@ -286,36 +344,36 @@
               </article>
             </li>
 
-            <li>
-              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1">
-                <div class="relative overflow-hidden">
+            <li class="@container">
+              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-fondo-200 bg-fondo-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1 @xl:flex-row dark:shadow-black/40">
+                <div class="relative overflow-hidden @xl:w-1/2 @xl:shrink-0">
                   <img
                     src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&h=400&q=75&auto=format&fit=crop"
                     alt=""
                     width="600"
                     height="400"
                     loading="lazy"
-                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105 @xl:h-full @xl:aspect-auto dark:brightness-90"
                   />
-                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                  <span class="absolute top-3 left-3 rounded-full bg-superficie/90 px-3 py-1 text-xs font-semibold">
                     Tueste medio
                   </span>
                 </div>
-                <div class="flex flex-1 flex-col gap-4 p-6">
+                <div class="flex flex-1 flex-col gap-4 p-6 @xl:p-8">
                   <div>
                     <h3 class="text-2xl font-semibold">Guatemala</h3>
-                    <p class="text-sm text-cafe-500">Huehuetenango · 1.600 m · Lavado</p>
+                    <p class="text-sm text-texto-500">Huehuetenango · 1.600 m · Lavado</p>
                   </div>
                   <ul class="flex flex-wrap gap-2 text-sm">
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Chocolate con leche</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Nuez</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Ciruela</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Chocolate con leche</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Nuez</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Ciruela</li>
                   </ul>
-                  <p class="text-cafe-700">Equilibrado y con mucho dulzor. Perfecto para espresso y cafés con leche.</p>
-                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                  <p class="text-texto-700">Equilibrado y con mucho dulzor. Perfecto para espresso y cafés con leche.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-fondo-200 pt-4">
                     <p>
                       <span class="font-display text-2xl font-semibold">13,50 €</span>
-                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                      <span class="text-sm text-texto-500">/ 250 g</span>
                     </p>
                     <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">
                       Elegir<span class="sr-only"> Guatemala</span>
@@ -325,36 +383,36 @@
               </article>
             </li>
 
-            <li>
-              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1">
-                <div class="relative overflow-hidden">
+            <li class="@container">
+              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-fondo-200 bg-fondo-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1 @xl:flex-row dark:shadow-black/40">
+                <div class="relative overflow-hidden @xl:w-1/2 @xl:shrink-0">
                   <img
                     src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&h=400&q=75&auto=format&fit=crop"
                     alt=""
                     width="600"
                     height="400"
                     loading="lazy"
-                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105 @xl:h-full @xl:aspect-auto dark:brightness-90"
                   />
-                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                  <span class="absolute top-3 left-3 rounded-full bg-superficie/90 px-3 py-1 text-xs font-semibold">
                     Tueste medio-oscuro
                   </span>
                 </div>
-                <div class="flex flex-1 flex-col gap-4 p-6">
+                <div class="flex flex-1 flex-col gap-4 p-6 @xl:p-8">
                   <div>
                     <h3 class="text-2xl font-semibold">Brasil</h3>
-                    <p class="text-sm text-cafe-500">Cerrado Mineiro · 1.100 m · Natural</p>
+                    <p class="text-sm text-texto-500">Cerrado Mineiro · 1.100 m · Natural</p>
                   </div>
                   <ul class="flex flex-wrap gap-2 text-sm">
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Avellana</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Chocolate negro</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Panela</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Avellana</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Chocolate negro</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Panela</li>
                   </ul>
-                  <p class="text-cafe-700">Cuerpo denso y poca acidez. El gran aliado de la cafetera italiana.</p>
-                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                  <p class="text-texto-700">Cuerpo denso y poca acidez. El gran aliado de la cafetera italiana.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-fondo-200 pt-4">
                     <p>
                       <span class="font-display text-2xl font-semibold">11,90 €</span>
-                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                      <span class="text-sm text-texto-500">/ 250 g</span>
                     </p>
                     <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">
                       Elegir<span class="sr-only"> Brasil</span>
@@ -364,36 +422,36 @@
               </article>
             </li>
 
-            <li>
-              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-crema-200 bg-crema-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1">
-                <div class="relative overflow-hidden">
+            <li class="@container">
+              <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-fondo-200 bg-fondo-50 shadow-sm transition duration-300 ease-out hover:shadow-lg motion-safe:hover:-translate-y-1 @xl:flex-row dark:shadow-black/40">
+                <div class="relative overflow-hidden @xl:w-1/2 @xl:shrink-0">
                   <img
                     src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&h=400&q=75&auto=format&fit=crop"
                     alt=""
                     width="600"
                     height="400"
                     loading="lazy"
-                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                    class="aspect-3/2 w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105 @xl:h-full @xl:aspect-auto dark:brightness-90"
                   />
-                  <span class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                  <span class="absolute top-3 left-3 rounded-full bg-superficie/90 px-3 py-1 text-xs font-semibold">
                     Tueste claro
                   </span>
                 </div>
-                <div class="flex flex-1 flex-col gap-4 p-6">
+                <div class="flex flex-1 flex-col gap-4 p-6 @xl:p-8">
                   <div>
                     <h3 class="text-2xl font-semibold">Ruanda</h3>
-                    <p class="text-sm text-cafe-500">Nyamasheke · 1.900 m · Lavado</p>
+                    <p class="text-sm text-texto-500">Nyamasheke · 1.900 m · Lavado</p>
                   </div>
                   <ul class="flex flex-wrap gap-2 text-sm">
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Té negro</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Naranja</li>
-                    <li class="rounded-full bg-crema-100 px-3 py-1">Miel</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Té negro</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Naranja</li>
+                    <li class="rounded-full bg-fondo-100 px-3 py-1">Miel</li>
                   </ul>
-                  <p class="text-cafe-700">Elegante y muy limpio, con un final largo. Brilla en V60 o Chemex.</p>
-                  <div class="mt-auto flex items-center justify-between border-t border-crema-200 pt-4">
+                  <p class="text-texto-700">Elegante y muy limpio, con un final largo. Brilla en V60 o Chemex.</p>
+                  <div class="mt-auto flex items-center justify-between border-t border-fondo-200 pt-4">
                     <p>
                       <span class="font-display text-2xl font-semibold">15,90 €</span>
-                      <span class="text-sm text-cafe-500">/ 250 g</span>
+                      <span class="text-sm text-texto-500">/ 250 g</span>
                     </p>
                     <a href="#planes" class="btn btn-primario px-4 py-2 text-sm">
                       Elegir<span class="sr-only"> Ruanda</span>
@@ -409,38 +467,38 @@
       <!-- ============ CÓMO FUNCIONA ============ -->
       <section
         id="como-funciona"
-        class="scroll-mt-16 bg-cafe-900 py-20 text-crema-50"
+        class="scroll-mt-16 bg-marca-900 py-20 text-claro-50"
         aria-labelledby="como-funciona-titulo"
       >
-        <div class="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 id="como-funciona-titulo" class="text-center text-3xl font-semibold sm:text-4xl">Cómo funciona</h2>
-          <p class="mx-auto mt-4 max-w-xl text-center text-lg text-crema-200">
+        <div class="contenedor">
+          <h2 id="como-funciona-titulo" class="text-center titulo-seccion">Cómo funciona</h2>
+          <p class="mx-auto mt-4 max-w-xl text-center text-lg text-claro-200">
             Sin permanencia ni complicaciones. De nuestro tostador a tu taza en tres pasos.
           </p>
 
           <ol class="mt-14 flex flex-col gap-12 md:flex-row md:gap-10">
             <li
-              class="relative flex flex-1 flex-col items-center justify-center text-center md:after:absolute md:after:top-7 md:after:left-[calc(50%+2.25rem)] md:after:h-px md:after:w-[calc(100%-2rem)] md:after:bg-crema-200/40"
+              class="relative flex flex-1 flex-col items-center justify-center text-center md:after:absolute md:after:top-7 md:after:left-[calc(50%+2.25rem)] md:after:h-px md:after:w-[calc(100%-2rem)] md:after:bg-claro-200/40"
             >
-              <span class="grid size-14 place-items-center rounded-full bg-tostado-600 font-display text-xl font-semibold">1</span>
+              <span class="grid size-14 place-items-center rounded-full bg-acento-600 font-display text-xl font-semibold text-sobre-acento">1</span>
               <h3 class="mt-6 text-xl font-semibold">Eliges</h3>
-              <p class="mt-2 max-w-[30ch] text-crema-200">
+              <p class="mt-2 max-w-[30ch] text-claro-200">
                 Escoge tu plan, cuántas bolsas quieres y si lo prefieres en grano o molido para tu cafetera.
               </p>
             </li>
             <li
-              class="relative flex flex-1 flex-col items-center justify-center text-center md:after:absolute md:after:top-7 md:after:left-[calc(50%+2.25rem)] md:after:h-px md:after:w-[calc(100%-2rem)] md:after:bg-crema-200/40"
+              class="relative flex flex-1 flex-col items-center justify-center text-center md:after:absolute md:after:top-7 md:after:left-[calc(50%+2.25rem)] md:after:h-px md:after:w-[calc(100%-2rem)] md:after:bg-claro-200/40"
             >
-              <span class="grid size-14 place-items-center rounded-full bg-tostado-600 font-display text-xl font-semibold">2</span>
+              <span class="grid size-14 place-items-center rounded-full bg-acento-600 font-display text-xl font-semibold text-sobre-acento">2</span>
               <h3 class="mt-6 text-xl font-semibold">Tostamos</h3>
-              <p class="mt-2 max-w-[30ch] text-crema-200">
+              <p class="mt-2 max-w-[30ch] text-claro-200">
                 Tostamos tu café en pequeños lotes la misma semana del envío, para que llegue en su mejor momento.
               </p>
             </li>
             <li class="flex flex-1 flex-col items-center justify-center text-center">
-              <span class="grid size-14 place-items-center rounded-full bg-tostado-600 font-display text-xl font-semibold">3</span>
+              <span class="grid size-14 place-items-center rounded-full bg-acento-600 font-display text-xl font-semibold text-sobre-acento">3</span>
               <h3 class="mt-6 text-xl font-semibold">Te llega a casa</h3>
-              <p class="mt-2 max-w-[30ch] text-crema-200">
+              <p class="mt-2 max-w-[30ch] text-claro-200">
                 Lo recibes en 24-48 h en una bolsa con válvula que conserva el aroma. Envío gratis.
               </p>
             </li>
@@ -448,34 +506,84 @@
         </div>
       </section>
 
+      <!-- ============ POR QUÉ TUESTE (P6 · bento) ============ -->
+      <section id="por-que" class="scroll-mt-16 bg-superficie py-20" aria-labelledby="por-que-titulo">
+        <div class="contenedor">
+          <h2 id="por-que-titulo" class="titulo-seccion max-w-2xl">Por qué Tueste</h2>
+
+          <!-- Rejilla de 4 columnas con dos filas. La caja grande ocupa 2×2 (col-span-2 row-span-2)
+               y la de las bolsas, 2 columnas: así las cajas encajan como en una fiambrera bento. -->
+          <ul class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:auto-rows-[minmax(12rem,auto)] lg:grid-cols-4">
+            <li class="relative isolate flex min-h-72 flex-col justify-end overflow-hidden rounded-3xl p-8 text-claro-50 sm:col-span-2 lg:row-span-2">
+              <img
+                src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1000&q=75&auto=format&fit=crop"
+                alt=""
+                width="1000"
+                height="667"
+                loading="lazy"
+                class="absolute inset-0 -z-10 size-full object-cover"
+              />
+              <div class="absolute inset-0 -z-10 bg-linear-to-t from-marca-900 via-marca-900/60 to-transparent" aria-hidden="true"></div>
+              <h3 class="text-3xl font-semibold">Tostamos a la vista</h3>
+              <p class="mt-2 max-w-[40ch] text-claro-100">
+                Nuestro tostador está en el mismo local donde preparamos los envíos. Cada lote se cata
+                antes de salir.
+              </p>
+            </li>
+
+            <li class="flex flex-col justify-between rounded-3xl bg-acento-600 p-8 text-sobre-acento">
+              <p class="font-display text-5xl font-semibold">+12</p>
+              <p class="mt-4">productores con los que compramos directamente, pagando por encima del precio de mercado.</p>
+            </li>
+
+            <li class="flex flex-col justify-between rounded-3xl border border-fondo-200 bg-superficie p-8">
+              <p class="font-display text-5xl font-semibold">24-48 h</p>
+              <p class="mt-4 text-texto-700">desde que sale del tostador hasta tu casa, con envío gratis.</p>
+            </li>
+
+            <li class="flex flex-col gap-6 rounded-3xl bg-fondo-100 p-8 sm:col-span-2 sm:flex-row sm:items-center">
+              <span class="grid size-16 shrink-0 place-items-center rounded-2xl bg-superficie text-acento-600">
+                <svg class="size-8" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg>
+              </span>
+              <div>
+                <h3 class="text-xl font-semibold">Bolsas compostables</h3>
+                <p class="mt-1 text-texto-700">
+                  Con válvula para conservar el aroma y sin plásticos: se tiran al contenedor orgánico.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <!-- ============ PLANES ============ -->
       <section id="planes" class="scroll-mt-16 py-20" aria-labelledby="planes-titulo">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="contenedor">
           <div class="mx-auto max-w-2xl text-center">
-            <h2 id="planes-titulo" class="text-3xl font-semibold sm:text-4xl">Planes de suscripción</h2>
-            <p class="mt-4 text-lg text-cafe-700">Elige cuánto café tomas al mes. Puedes cambiar de plan o pausarlo cuando quieras.</p>
+            <h2 id="planes-titulo" class="titulo-seccion">Planes de suscripción</h2>
+            <p class="mt-4 text-lg text-texto-700">Elige cuánto café tomas al mes. Puedes cambiar de plan o pausarlo cuando quieras.</p>
           </div>
 
           <ul class="mx-auto mt-14 grid max-w-md gap-8 md:max-w-none md:grid-cols-3 md:items-center md:gap-6">
             <li>
-              <article class="flex flex-col rounded-3xl border border-crema-200 bg-white p-8">
+              <article class="flex flex-col rounded-3xl border border-fondo-200 bg-superficie p-8">
                 <h3 class="text-2xl font-semibold">Básico</h3>
-                <p class="mt-1 text-cafe-500">Para empezar a descubrir</p>
+                <p class="mt-1 text-texto-500">Para empezar a descubrir</p>
                 <p class="mt-6">
                   <span class="font-display text-4xl font-semibold">12,90 €</span>
-                  <span class="text-cafe-500">/ mes</span>
+                  <span class="text-texto-500">/ mes</span>
                 </p>
-                <ul class="mt-6 space-y-3 text-cafe-700">
+                <ul class="mt-6 space-y-3 text-texto-700">
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     1 bolsa de 250 g al mes
                   </li>
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     El café del mes que elijamos
                   </li>
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     Envío gratis
                   </li>
                 </ul>
@@ -484,31 +592,31 @@
             </li>
 
             <li>
-              <article class="relative flex flex-col rounded-3xl border-2 border-tostado-600 bg-white p-8 shadow-xl md:scale-105">
-                <p class="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-tostado-600 px-4 py-1 text-sm font-semibold whitespace-nowrap text-white">
+              <article class="relative flex flex-col rounded-3xl border-2 border-acento-600 bg-superficie p-8 shadow-xl md:scale-105 dark:shadow-black/50">
+                <p class="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-acento-600 px-4 py-1 text-sm font-semibold whitespace-nowrap text-sobre-acento">
                   ⭐ Más popular
                 </p>
                 <h3 class="text-2xl font-semibold">Popular</h3>
-                <p class="mt-1 text-cafe-500">Para el café de cada día</p>
+                <p class="mt-1 text-texto-500">Para el café de cada día</p>
                 <p class="mt-6">
                   <span class="font-display text-4xl font-semibold">22,90 €</span>
-                  <span class="text-cafe-500">/ mes</span>
+                  <span class="text-texto-500">/ mes</span>
                 </p>
-                <ul class="mt-6 space-y-3 text-cafe-700">
+                <ul class="mt-6 space-y-3 text-texto-700">
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     2 bolsas de 250 g al mes
                   </li>
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     Tú eliges los orígenes
                   </li>
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     Fichas de cata con cada envío
                   </li>
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     Envío gratis
                   </li>
                 </ul>
@@ -517,24 +625,24 @@
             </li>
 
             <li>
-              <article class="flex flex-col rounded-3xl border border-crema-200 bg-white p-8">
+              <article class="flex flex-col rounded-3xl border border-fondo-200 bg-superficie p-8">
                 <h3 class="text-2xl font-semibold">Pro</h3>
-                <p class="mt-1 text-cafe-500">Para casas muy cafeteras</p>
+                <p class="mt-1 text-texto-500">Para casas muy cafeteras</p>
                 <p class="mt-6">
                   <span class="font-display text-4xl font-semibold">39,90 €</span>
-                  <span class="text-cafe-500">/ mes</span>
+                  <span class="text-texto-500">/ mes</span>
                 </p>
-                <ul class="mt-6 space-y-3 text-cafe-700">
+                <ul class="mt-6 space-y-3 text-texto-700">
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     4 bolsas de 250 g al mes
                   </li>
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     Microlotes y ediciones limitadas
                   </li>
                   <li class="flex gap-3">
-                    <svg class="mt-0.5 size-5 shrink-0 text-tostado-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <svg class="mt-0.5 size-5 shrink-0 text-acento-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                     Envío gratis
                   </li>
                 </ul>
@@ -546,17 +654,17 @@
       </section>
 
       <!-- ============ FAQ ============ -->
-      <section id="faq" class="scroll-mt-16 bg-white py-20" aria-labelledby="faq-titulo">
+      <section id="faq" class="scroll-mt-16 bg-superficie py-20" aria-labelledby="faq-titulo">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
-          <h2 id="faq-titulo" class="text-center text-3xl font-semibold sm:text-4xl">Preguntas frecuentes</h2>
+          <h2 id="faq-titulo" class="text-center titulo-seccion">Preguntas frecuentes</h2>
 
-          <div class="mt-12 divide-y divide-crema-200 border-y border-crema-200">
+          <div class="mt-12 divide-y divide-fondo-200 border-y border-fondo-200">
             <details name="faq" class="group">
               <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
                 ¿Puedo cancelar cuando quiera?
                 <svg class="size-5 shrink-0 group-open:rotate-180 motion-safe:transition-transform" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
               </summary>
-              <p class="pb-5 text-cafe-700">
+              <p class="pb-5 text-texto-700">
                 Sí. No hay permanencia: puedes pausar o cancelar tu suscripción desde tu cuenta en cualquier
                 momento, y no te cobraremos el siguiente envío.
               </p>
@@ -567,7 +675,7 @@
                 ¿Lo enviáis molido o en grano?
                 <svg class="size-5 shrink-0 group-open:rotate-180 motion-safe:transition-transform" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
               </summary>
-              <p class="pb-5 text-cafe-700">
+              <p class="pb-5 text-texto-700">
                 Como prefieras. Te recomendamos el grano para conservar mejor el aroma, pero si no tienes
                 molinillo lo molemos para tu método: espresso, italiana, filtro o prensa francesa.
               </p>
@@ -578,7 +686,7 @@
                 ¿Cuándo llega cada envío?
                 <svg class="size-5 shrink-0 group-open:rotate-180 motion-safe:transition-transform" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
               </summary>
-              <p class="pb-5 text-cafe-700">
+              <p class="pb-5 text-texto-700">
                 Tostamos los lunes y enviamos entre el martes y el miércoles. En la península lo recibes en
                 24-48 horas.
               </p>
@@ -589,7 +697,7 @@
                 ¿Cuánto tiempo aguanta el café fresco?
                 <svg class="size-5 shrink-0 group-open:rotate-180 motion-safe:transition-transform" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
               </summary>
-              <p class="pb-5 text-cafe-700">
+              <p class="pb-5 text-texto-700">
                 Está en su mejor momento entre una y cinco semanas después del tueste. Guárdalo en su bolsa
                 cerrada, lejos de la luz y del calor (y mejor fuera de la nevera).
               </p>
@@ -600,7 +708,7 @@
                 ¿Puedo regalar una suscripción?
                 <svg class="size-5 shrink-0 group-open:rotate-180 motion-safe:transition-transform" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
               </summary>
-              <p class="pb-5 text-cafe-700">
+              <p class="pb-5 text-texto-700">
                 Claro. Puedes regalar 3, 6 o 12 meses de cualquier plan; la persona que lo recibe elige
                 cómo quiere su café.
               </p>
@@ -611,11 +719,11 @@
     </main>
 
     <!-- ============ PIE ============ -->
-    <footer class="bg-cafe-900 text-crema-100">
-      <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:grid-cols-2 sm:px-6 lg:grid-cols-[2fr_1fr_1fr_2fr]">
+    <footer class="bg-marca-900 text-claro-100">
+      <div class="contenedor grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_2fr]">
         <div>
-          <p class="flex items-center gap-2 font-display text-2xl font-semibold text-crema-50">
-            <svg class="size-7 text-tostado-500" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <p class="flex items-center gap-2 font-display text-2xl font-semibold text-claro-50">
+            <svg class="size-7 text-acento-500" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 2v2" />
               <path d="M14 2v2" />
               <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
@@ -623,36 +731,37 @@
             </svg>
             Tueste
           </p>
-          <p class="mt-4 max-w-[35ch] text-crema-200">Pequeño tostadero de café de especialidad. Tostamos poco, tostamos a menudo.</p>
+          <p class="mt-4 max-w-[35ch] text-claro-200">Pequeño tostadero de café de especialidad. Tostamos poco, tostamos a menudo.</p>
           <ul class="mt-6 flex flex-wrap gap-3">
-            <li><a href="#" class="block rounded-full border border-crema-200/30 px-4 py-2 text-sm hover:bg-crema-50/10">Instagram</a></li>
-            <li><a href="#" class="block rounded-full border border-crema-200/30 px-4 py-2 text-sm hover:bg-crema-50/10">TikTok</a></li>
-            <li><a href="#" class="block rounded-full border border-crema-200/30 px-4 py-2 text-sm hover:bg-crema-50/10">YouTube</a></li>
+            <li><a href="#" class="block rounded-full border border-claro-200/30 px-4 py-2 text-sm hover:bg-claro-50/10">Instagram</a></li>
+            <li><a href="#" class="block rounded-full border border-claro-200/30 px-4 py-2 text-sm hover:bg-claro-50/10">TikTok</a></li>
+            <li><a href="#" class="block rounded-full border border-claro-200/30 px-4 py-2 text-sm hover:bg-claro-50/10">YouTube</a></li>
           </ul>
         </div>
 
         <nav aria-labelledby="footer-tienda">
-          <h2 id="footer-tienda" class="font-sans text-sm font-semibold tracking-widest text-crema-50 uppercase">Tienda</h2>
-          <ul class="mt-4 space-y-3 text-crema-200">
-            <li><a href="#cafes" class="hover:text-crema-50">Cafés del mes</a></li>
-            <li><a href="#planes" class="hover:text-crema-50">Suscripciones</a></li>
-            <li><a href="#" class="hover:text-crema-50">Tarjetas regalo</a></li>
+          <h2 id="footer-tienda" class="font-sans text-sm font-semibold tracking-widest text-claro-50 uppercase">Tienda</h2>
+          <ul class="mt-4 space-y-3 text-claro-200">
+            <li><a href="#cafes" class="hover:text-claro-50">Cafés del mes</a></li>
+            <li><a href="#planes" class="hover:text-claro-50">Suscripciones</a></li>
+            <li><a href="#" class="hover:text-claro-50">Tarjetas regalo</a></li>
           </ul>
         </nav>
 
         <nav aria-labelledby="footer-ayuda">
-          <h2 id="footer-ayuda" class="font-sans text-sm font-semibold tracking-widest text-crema-50 uppercase">Ayuda</h2>
-          <ul class="mt-4 space-y-3 text-crema-200">
-            <li><a href="#faq" class="hover:text-crema-50">Preguntas frecuentes</a></li>
-            <li><a href="#" class="hover:text-crema-50">Envíos</a></li>
-            <li><a href="#" class="hover:text-crema-50">Contacto</a></li>
+          <h2 id="footer-ayuda" class="font-sans text-sm font-semibold tracking-widest text-claro-50 uppercase">Ayuda</h2>
+          <ul class="mt-4 space-y-3 text-claro-200">
+            <li><a href="#faq" class="hover:text-claro-50">Preguntas frecuentes</a></li>
+            <li><a href="#" class="hover:text-claro-50">Envíos</a></li>
+            <li><a href="#" class="hover:text-claro-50">Contacto</a></li>
+            <li><a href="/panel.html" class="hover:text-claro-50">Mi suscripción (demo)</a></li>
           </ul>
         </nav>
 
         <div>
-          <h2 class="font-sans text-sm font-semibold tracking-widest text-crema-50 uppercase">Newsletter</h2>
+          <h2 class="font-sans text-sm font-semibold tracking-widest text-claro-50 uppercase">Newsletter</h2>
           <form id="newsletter" class="mt-4">
-            <label for="newsletter-email" class="text-crema-200">Novedades y lotes nuevos, una vez al mes.</label>
+            <label for="newsletter-email" class="text-claro-200">Novedades y lotes nuevos, una vez al mes.</label>
             <div class="mt-3 flex flex-wrap gap-2">
               <input
                 id="newsletter-email"
@@ -662,22 +771,33 @@
                 required
                 placeholder="tucorreo@ejemplo.com"
                 aria-describedby="newsletter-error"
-                class="peer min-w-0 flex-1 rounded-full border border-crema-200/30 bg-crema-50/10 px-4 py-2 text-crema-50 placeholder:text-crema-200/60 focus:border-tostado-500 focus:bg-crema-50/15 user-invalid:border-red-300 disabled:cursor-not-allowed disabled:opacity-50"
+                class="peer min-w-0 flex-1 rounded-full border border-claro-200/30 bg-claro-50/10 px-4 py-2 text-claro-50 placeholder:text-claro-200/60 focus:border-acento-500 focus:bg-claro-50/15 user-invalid:border-red-300 disabled:cursor-not-allowed disabled:opacity-50"
               />
-              <button type="submit" class="btn btn-primario px-5 py-2 focus-visible:outline-crema-100">OK</button>
+              <button type="submit" class="btn btn-primario px-5 py-2 focus-visible:outline-claro-100">OK</button>
               <p id="newsletter-error" class="hidden basis-full text-sm text-red-300 peer-user-invalid:block">
                 Revisa el email: parece que le falta algo (por ejemplo, la @).
               </p>
             </div>
-            <p id="newsletter-status" class="mt-3 text-sm text-crema-200" aria-live="polite"></p>
+            <p id="newsletter-status" class="mt-3 text-sm text-claro-200" aria-live="polite"></p>
           </form>
         </div>
       </div>
 
-      <div class="border-t border-crema-200/20">
-        <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-crema-200 sm:flex-row sm:justify-between sm:px-6">
-          <p>© 2026 Tueste · Proyecto ficticio de práctica.</p>
-          <p>Fotos de <a href="https://unsplash.com" class="underline hover:text-crema-50">Unsplash</a></p>
+      <div class="border-t border-claro-200/20">
+        <div class="contenedor flex flex-col gap-3 py-6 text-sm text-claro-200 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 Tueste · Proyecto ficticio de práctica · Fotos de <a href="https://unsplash.com" class="underline hover:text-claro-50">Unsplash</a></p>
+          <!-- D3 · Selector de tema: solo cambia el atributo data-theme de <html>. -->
+          <p class="flex items-center gap-2">
+            <label for="selector-tema">Tema de color</label>
+            <select
+              id="selector-tema"
+              class="rounded-full border border-claro-200/30 bg-marca-900 px-3 py-1 text-claro-50 hover:border-claro-200/60"
+            >
+              <option value="espresso">Espresso</option>
+              <option value="matcha">Matcha</option>
+              <option value="caramelo">Caramelo</option>
+            </select>
+          </p>
         </div>
       </div>
     </footer>

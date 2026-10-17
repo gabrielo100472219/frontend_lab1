@@ -1,28 +1,51 @@
 @import "tailwindcss";
 
 /* Tailwind busca clases en todos los ficheros del proyecto: la documentación
-   está llena de nombres de clases de ejemplo y no queremos que entren en la build. */
+   está llena de nombres de clases de ejemplo y no queremos que entren en la build.
+   d6/antes.html es la salida en bruto de la IA (desafío D6): no forma parte de la web. */
 @source not "../README.md";
 @source not "../NOTAS.md";
+@source not "../d6/antes.html";
+@source not "../d6/README.md";
 
-/* Tokens de diseño: cada variable genera sus utilidades
-   (--color-cafe-900 → bg-cafe-900, text-cafe-900, border-cafe-900…). */
+/* P1 · Modo oscuro con botón: dark: se activa con la clase .dark en <html>,
+   no con la preferencia del sistema (esa la leemos en JS como valor inicial). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tokens de diseño. Con "inline", las utilidades usan directamente la variable
+   (bg-fondo-50 → background-color: var(--fondo-50)), así que basta con cambiar
+   las variables según el tema para que cambie toda la página (D3). */
+@theme inline {
+  /* Superficies de la página: cambian en modo oscuro. */
+  --color-fondo-50: var(--fondo-50);
+  --color-fondo-100: var(--fondo-100);
+  --color-fondo-200: var(--fondo-200);
+  --color-superficie: var(--superficie);
+
+  /* Texto sobre esas superficies: cambia en modo oscuro. */
+  --color-texto-500: var(--texto-500);
+  --color-texto-700: var(--texto-700);
+  --color-texto-900: var(--texto-900);
+
+  /* Color de marca (bandas oscuras, pie) y texto claro sobre él: cambian con el tema. */
+  --color-marca-500: var(--marca-500);
+  --color-marca-700: var(--marca-700);
+  --color-marca-900: var(--marca-900);
+  --color-claro-50: var(--claro-50);
+  --color-claro-100: var(--claro-100);
+  --color-claro-200: var(--claro-200);
+
+  /* Acento (botones, enlaces, iconos) y el texto que va encima. */
+  --color-acento-500: var(--acento-500);
+  --color-acento-600: var(--acento-600);
+  --color-acento-700: var(--acento-700);
+  --color-sobre-acento: var(--sobre-acento);
+}
+
 @theme {
-  --color-crema-50: #fbf8f3;
-  --color-crema-100: #f4ece0;
-  --color-crema-200: #e8d9c3;
-
-  --color-cafe-500: #8b5e3c;
-  --color-cafe-700: #5a3a22;
-  --color-cafe-900: #2b1a10;
-
-  --color-tostado-500: #d97706;
-  --color-tostado-600: #b45309;
-  --color-tostado-700: #92400e;
-
   --font-display: "Fraunces", Georgia, serif;
 
-  /* Genera la utilidad animate-aparecer (entrada del hero). */
+  /* Genera la utilidad animate-aparecer (entrada del hero, P7). */
   --animate-aparecer: aparecer 0.6s ease-out both;
 
   @keyframes aparecer {
@@ -37,8 +60,97 @@
   }
 }
 
-/* Dentro de capas, para que cualquier utilidad del HTML pueda sobrescribirlas (lección 16). */
+/* ===== Temas (D3) =====
+   Cada tema solo redefine variables. El HTML no cambia: solo el atributo data-theme. */
 @layer base {
+  :root,
+  [data-theme="espresso"] {
+    --fondo-50: #fbf8f3;
+    --fondo-100: #f4ece0;
+    --fondo-200: #e8d9c3;
+    --superficie: #ffffff;
+    --texto-500: #7a5235;
+    --texto-700: #5a3a22;
+    --texto-900: #2b1a10;
+    --marca-500: #8b5e3c;
+    --marca-700: #5a3a22;
+    --marca-900: #2b1a10;
+    --claro-50: #fbf8f3;
+    --claro-100: #f4ece0;
+    --claro-200: #e8d9c3;
+    --acento-500: #d97706;
+    --acento-600: #b45309;
+    --acento-700: #92400e;
+    --sobre-acento: #ffffff;
+  }
+
+  [data-theme="matcha"] {
+    --fondo-50: #f6f8f1;
+    --fondo-100: #e9efdd;
+    --fondo-200: #d3dfbf;
+    --texto-500: #4f6136;
+    --texto-700: #3a4a26;
+    --texto-900: #1c2612;
+    --marca-500: #5b7a34;
+    --marca-700: #3a4f22;
+    --marca-900: #1c2812;
+    --claro-50: #f6f8f1;
+    --claro-100: #e9efdd;
+    --claro-200: #d3dfbf;
+    --acento-500: #65a30d;
+    --acento-600: #3f6212;
+    --acento-700: #365314;
+  }
+
+  [data-theme="caramelo"] {
+    --fondo-50: #fffaf2;
+    --fondo-100: #fdf0dc;
+    --fondo-200: #f6dcb4;
+    --texto-500: #855018;
+    --texto-700: #6b3e12;
+    --texto-900: #3d2208;
+    --marca-500: #b8732a;
+    --marca-700: #7c4615;
+    --marca-900: #4a2a0c;
+    --claro-50: #fffaf2;
+    --claro-100: #fdf0dc;
+    --claro-200: #f6dcb4;
+    --acento-500: #e8590c;
+    --acento-600: #c2410c;
+    --acento-700: #9a3412;
+  }
+
+  /* Modo oscuro (P1): superficies y texto se invierten; la marca y el acento siguen
+     siendo los del tema, pero el acento se aclara para que se lea sobre fondo oscuro. */
+  .dark {
+    color-scheme: dark;
+    --fondo-50: #15120f;
+    --fondo-100: #201b16;
+    --fondo-200: #3a3129;
+    --superficie: #1c1814;
+    --texto-500: #b8a690;
+    --texto-700: #d8c9b6;
+    --texto-900: #f6efe6;
+    --acento-500: #fbbf24;
+    --acento-600: #f59e0b;
+    --acento-700: #fbbf24;
+    --sobre-acento: #1c1407;
+  }
+
+  .dark[data-theme="matcha"] {
+    --acento-500: #bef264;
+    --acento-600: #a3e635;
+    --acento-700: #bef264;
+    --sobre-acento: #1a2e05;
+  }
+
+  .dark[data-theme="caramelo"] {
+    --acento-500: #fdba74;
+    --acento-600: #fb923c;
+    --acento-700: #fdba74;
+    --sobre-acento: #2a1204;
+  }
+
   h1,
   h2,
   h3 {
@@ -51,16 +163,64 @@
   }
 }
 
+/* ===== Utilidades propias (D4) =====
+   A diferencia de una clase con @apply, @utility se comporta como cualquier utilidad
+   de Tailwind: admite variantes (md:contenedor, hover:…) y va en la capa utilities. */
+@utility contenedor {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--container-6xl);
+  padding-inline: --spacing(4);
+
+  @variant sm {
+    padding-inline: --spacing(6);
+  }
+}
+
+@utility titulo-seccion {
+  font-size: var(--text-3xl);
+  line-height: var(--text-3xl--line-height);
+  font-weight: var(--font-weight-semibold);
+
+  @variant sm {
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
+  }
+}
+
+/* D5 · Esqueleto del panel con áreas de grid (lección 20, paso 4).
+   Móvil: cabecera, menú lateral arriba (en horizontal) y contenido.
+   Desde md: barra lateral a la izquierda. */
+@utility layout-panel {
+  display: grid;
+  height: 100dvh;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-areas:
+    "cabecera"
+    "lateral"
+    "contenido";
+
+  @variant md {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "cabecera cabecera"
+      "lateral contenido";
+  }
+}
+
+/* Botones: componentes, porque combinan muchas propiedades y estados.
+   Al ir en la capa components, una utilidad del HTML siempre los puede ajustar (btn px-4). */
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold transition duration-200 ease-out motion-safe:hover:-translate-y-0.5;
   }
 
   .btn-primario {
-    @apply bg-tostado-600 text-white hover:bg-tostado-700 hover:shadow-lg focus-visible:outline-tostado-600 disabled:pointer-events-none disabled:opacity-50;
+    @apply bg-acento-600 text-sobre-acento hover:bg-acento-700 hover:shadow-lg focus-visible:outline-acento-600 disabled:pointer-events-none disabled:opacity-50;
   }
 
   .btn-secundario {
-    @apply border border-cafe-900/20 text-cafe-900 hover:border-cafe-900/40 hover:bg-crema-100;
+    @apply border border-texto-900/20 text-texto-900 hover:border-texto-900/40 hover:bg-fondo-100;
   }
 }
