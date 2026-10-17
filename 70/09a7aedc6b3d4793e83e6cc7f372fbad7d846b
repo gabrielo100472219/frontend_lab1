@@ -1,0 +1,21 @@
+NOTAS.md
+  s_efbefe09aaf2f9::t_768da753b128ae 52,56-59,69-71,109-119,125-128
+README.md
+  s_efbefe09aaf2f9::t_3e711705845f5e 3,5,7-9,15,17,20-54,56,58-91,96-98,100,105-107,110-184,186-187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7009a7aedc6b3d4793e83e6cc7f372fbad7d846b",
+  "prompts": {},
+  "sessions": {
+    "s_efbefe09aaf2f9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4aa88c50-c077-4ae5-bf86-df2af0c5fa34",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
