@@ -1,0 +1,21 @@
+NOTAS.md
+  s_efbefe09aaf2f9::t_d56d1af5fc189b 1-109
+README.md
+  s_efbefe09aaf2f9::t_65518ccfa23ecb 1-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ceec65abea089b43c8be618e08d8d233d8536b7a",
+  "prompts": {},
+  "sessions": {
+    "s_efbefe09aaf2f9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4aa88c50-c077-4ae5-bf86-df2af0c5fa34",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
