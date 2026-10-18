@@ -161,119 +161,62 @@ En [`NOTAS.md`](./NOTAS.md) explico cada clase que no es evidente y con qué lec
 
 ## 🤖 Bitácora de IA
 
-**Herramienta:** Claude Code (agente en el terminal), con el temario del módulo como contexto. Le pedí primero un resumen del temario y un plan por secciones, y después la implementación. Las capturas y las comprobaciones (ancho, teclado, formulario, Lighthouse, axe) se hicieron con Chrome headless.
+**Herramienta:** Claude Code (agente en el terminal), con la carpeta del temario del módulo como contexto. Las capturas y las comprobaciones (anchos, teclado, formulario, Lighthouse, axe) las hizo el propio agente con Chrome headless. No he cambiado código a mano: cuando algo no me cuadraba, se lo pedí al agente.
 
-### 1 · Revisar contra el enunciado
-
-#### Prompt
-
-"Implementa el plan" (el plan se hizo a partir del boceto del enunciado, sin la lista de requisitos). La corrección llegó después, con el prompt: "Se me olvidó pegar los requisitos: ¿están todos los obligatorios? Quiero añadir un par de opcionales." (con la lista de requisitos del enunciado)
-
-#### Qué me dio
-
-Una landing completa, pero con **3 tarjetas** de café que usaban un enlace de texto "Elegir →" como acción, y la sección de pasos maquetada con **grid** (`grid md:grid-cols-3`).
-
-#### Qué corregí y por qué
-
-Al repasar la lista de obligatorios: O5 pide **al menos 6 tarjetas** con **botón** y hover con `-translate-y-1`, y O6 pide **flexbox** (`flex flex-col md:flex-row`). Añadí tres orígenes más, cambié el enlace por un botón y pasé los pasos a flex con `flex-1`, para que los tres midan lo mismo y la línea de unión (calculada con `calc()` sobre el ancho de cada paso) siga encajando.
-
-### 2 · El foco invisible del enlace de salto
+### 1 · Planificar a partir del enunciado
 
 #### Prompt
 
-"Implementa el plan". El plan incluía una fase de comprobación: 375/768/1280 px, recorrido con Tab y foco visible.
+"I want to implement the laboratory related to the contents of the first module of this course. The theoretical contents are in 1-layout in the luckia-front-end-moderno-ia folder. I want you to review the contents and use them for the implementation. This is the exercise we have to do: …" (con el enunciado completo pegado, requisitos incluidos)
 
 #### Qué me dio
 
-Un estilo global `:focus-visible { outline-current }` (el anillo de foco toma el color del texto). Funcionaba casi en todo, pero el enlace "Saltar al contenido" tiene texto claro sobre una píldora oscura, así que su anillo era **claro sobre el fondo claro de la página**, invisible.
+Un resumen de las 23 lecciones del módulo y un plan por secciones (cabecera, hero, cafés, pasos, planes, FAQ, pie), cada una con los requisitos O1-O9 que cubre y las clases clave.
 
 #### Qué corregí y por qué
 
-Le di un color de anillo propio (hoy `focus-visible:outline-texto-900`). `currentColor` contrasta con el fondo **del propio elemento**, pero con `outline-offset` el anillo se pinta **fuera**, sobre el fondo de alrededor. Por el mismo motivo los botones con fondo de acento llevan su propio color de anillo.
+Nada en el plan. Le di el repositorio y le pedí que lo implementara ("this is the remote: … implement the plan").
 
-### 3 · "La build pasa" no significa que esté bien
+### 2 · Las fotos que no salían en móvil
 
 #### Prompt
 
-"Se me olvidó pegar los requisitos: ¿están todos los obligatorios? Quiero añadir un par de opcionales." (con la lista de requisitos del enunciado)
+"The photos in the mobile version aren't there" (con una captura del README en GitHub).
 
 #### Qué me dio
 
-Para no repetir a mano el HTML de las tarjetas, generó las 6 con un script que sustituía el bloque antiguo buscando el `</ul>` de cierre. Pero ese texto también aparece dentro de cada tarjeta (la lista de notas de cata), así que cortó demasiado pronto y **dejó restos de las tarjetas antiguas**: 8 tarjetas, dos de ellas duplicadas. La build terminaba sin errores.
+Me explicó que la web estaba bien y que el fallo era de la **captura**: las imágenes llevan `loading="lazy"` y solo se descargan al acercarse con el scroll. Su script hacía la captura de página completa sin hacer scroll, y en móvil (donde las tarjetas quedan muy abajo) solo habían cargado 3 de 7 imágenes. Rehízo la captura, pero en GitHub seguía viéndose la antigua.
 
 #### Qué corregí y por qué
 
-Lo detectó una comprobación que contaba los `article` de la sección. Borré el bloque sobrante y validé el HTML. Lección: igual que dice el tema 22, que la build termine bien no demuestra nada; hay que mirar el resultado.
+Le pedí que lo arreglara en el repo. Ahora el script recorre la página y espera a que carguen **todas** las imágenes antes de capturar, y las capturas tienen nombres nuevos para que la caché de GitHub no enseñe las viejas. `loading="lazy"` se queda porque es bueno para el rendimiento. Lo que aprendí: en DevTools, antes de hacer "Capture full size screenshot", hay que bajar hasta el final una vez.
 
-### 4 · `aria-label` donde no toca
+### 3 · Ir a por la nota máxima: opcionales y desafíos
 
 #### Prompt
 
-"Se me olvidó pegar los requisitos: ¿están todos los obligatorios? Quiero añadir un par de opcionales." Antes de entregar le pedí al agente que validara el HTML.
+"Fix them in the repo. Add all the different bullet points I gave you, including the desafíos, for me to get the max mark."
 
 #### Qué me dio
 
-Había puesto `aria-label="Notas de cata"` y `aria-label="Redes sociales"` en `<ul>` normales.
+P1-P7 y los desafíos (menú sin JS, container queries, multitema, `@utility`, panel con áreas de grid, Lighthouse). Para que encajaran tuvo que cambiar dos decisiones de la primera versión:
+
+- Los colores se llamaban por su color (`crema`, `cafe`, `tostado`). Con el tema "matcha" una clase `bg-cafe-600` pintaría verde, así que los renombró **por función** (`fondo`, `texto`, `marca`, `acento`) y los puso a apuntar a variables que cambia cada tema.
+- El menú móvil era un `<button aria-expanded>` con JS. D1 pide hacerlo **sin JS**, así que pasó a checkbox + `peer-checked:`, y el JS se quedó como mejora (cerrar con Escape o al elegir un enlace).
 
 #### Qué corregí y por qué
 
-Los quité: `aria-label` en una lista sin rol interactivo no aporta nada (muchos lectores de pantalla lo ignoran) y el validador lo marca.
+Después le pedí repasar todo el código conmigo, requisito por requisito, para entender cada clase. En ese repaso decidí **no entregar el D6** y le pedí que lo quitara del proyecto ("quita esta parte del proyecto, prefiero no entregarlo").
 
-### 5 · SEO 92 en Lighthouse
+### Lo que la IA corrigió sola al comprobar su trabajo
 
-#### Prompt
+No se lo pedí: lo encontró ella al verificar, y lo apunto porque son los errores típicos de los que avisa el enunciado.
 
-"Se me olvidó pegar los requisitos: ¿están todos los obligatorios? Quiero añadir un par de opcionales." O8 pide apuntar la nota de Lighthouse.
-
-#### Qué me dio
-
-Accesibilidad y Buenas prácticas a 100, pero SEO a 92 por un `robots.txt` "inválido": no existía, y el servidor devolvía el `index.html` en su lugar.
-
-#### Qué corregí y por qué
-
-Añadí `public/robots.txt` (Vite copia `public/` tal cual a la raíz) → SEO 100.
-
-### 6 · Las fotos que no salían en la captura de móvil
-
-#### Prompt
-
-"Las fotos de la versión móvil no están" (con una captura del README en GitHub).
-
-#### Qué me dio
-
-La web estaba bien, pero la **captura** no: las imágenes llevan `loading="lazy"` y solo se descargan al acercarse con el scroll. El script hacía la captura de página completa sin hacer scroll, así que en móvil (donde las tarjetas quedan muy abajo) solo había cargado 3 de 7 imágenes.
-
-#### Qué corregí y por qué
-
-El script ahora recorre la página antes de capturar y espera a que **todas** las imágenes hayan cargado. Las capturas tienen nombres nuevos para que la caché de GitHub no enseñe las viejas. `loading="lazy"` se queda: es bueno para el rendimiento.
-
-### 7 · El panel que hacía scroll entero
-
-#### Prompt
-
-"Añade todos los puntos que te di, incluidos los desafíos, para sacar la nota máxima."
-
-#### Qué me dio
-
-El panel (D5) con `grid-template-areas`, `height: 100dvh` y `overflow-y-auto` en el `<main>`. El grid medía exactamente la pantalla… pero **la página entera seguía haciendo scroll** (145 px en escritorio, 756 px en móvil).
-
-#### Qué corregí y por qué
-
-Los culpables eran los elementos `sr-only` (el `caption` de la tabla y un `h2` oculto): son `position: absolute`, y sin ningún padre posicionado se colocan respecto a la página, no dentro del `<main>` con scroll, así que la alargaban. Con `relative` en el `<main>` quedan dentro de su caja. Lo encontré midiendo con las DevTools el alto de cada zona del grid (estaba bien) y luego el `scrollHeight` del documento (no).
-
-### 8 · Un enlace activo con poco contraste
-
-#### Prompt
-
-Mismo prompt que el 7.
-
-#### Qué me dio
-
-En el panel, el enlace activo de la barra lateral (`aria-[current=page]:text-acento-600` sobre `bg-fondo-100`).
-
-#### Qué corregí y por qué
-
-axe-core midió **4,4:1** (el mínimo es 4,5:1). Lo cambié a `acento-700`. Lighthouse solo mide el tema por defecto, así que pasé axe por los 3 temas × claro/oscuro en todas las páginas.
+- **Foco invisible en el enlace "Saltar al contenido"**: el estilo global `outline-current` daba un anillo claro sobre el fondo claro de la página. Con `outline-offset` el anillo se pinta **fuera** del elemento, sobre el fondo de alrededor, así que `currentColor` no basta. Le puso `focus-visible:outline-texto-900`.
+- **`aria-label` en `<ul>` normales** ("Notas de cata", "Redes sociales"): el validador de HTML lo marcó y los quitó, porque en una lista sin rol interactivo no aporta nada.
+- **SEO 92 en Lighthouse**: no había `robots.txt` y el servidor devolvía el `index.html` en su lugar. Añadió `public/robots.txt` → 100.
+- **El panel (D5) hacía scroll entero** aunque el grid medía `100dvh`: los elementos `sr-only` son `position: absolute` y, sin un padre posicionado, alargaban la página. Lo arregló con `relative` en el `<main>`.
+- **Contraste 4,4:1** en el enlace activo del panel (el mínimo es 4,5:1): pasó de `acento-600` a `acento-700`, y comprobó con axe-core los 3 temas × claro/oscuro.
 
 ## Créditos
 
