@@ -1,0 +1,23 @@
+README.md
+  s_efbefe09aaf2f9::t_81be71ab5f7e26 5,24,36,80-81,155,159,164,264
+src/style.css
+  s_efbefe09aaf2f9::t_b2efd8c2d63f04 4
+vite.config.ts
+  s_efbefe09aaf2f9::t_9b73d59e37638f 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1dba51f11af1c972f958b4339c87594a88694976",
+  "prompts": {},
+  "sessions": {
+    "s_efbefe09aaf2f9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4aa88c50-c077-4ae5-bf86-df2af0c5fa34",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
