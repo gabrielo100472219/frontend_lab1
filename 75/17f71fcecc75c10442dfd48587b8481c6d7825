@@ -1,0 +1,19 @@
+README.md
+  s_1204565e79660f::t_429bef2b9bd11d 164,166,170,174,178,180,184,188,192,194,198,202,204-205,209,211,213,215-219
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7517f71fcecc75c10442dfd48587b8481c6d7825",
+  "prompts": {},
+  "sessions": {
+    "s_1204565e79660f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1355f5b5-d6f5-4a42-b81c-09aeef14614b",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
