@@ -2,7 +2,7 @@
 
 **Tema elegido: 🅰️ Tueste**, el tostadero de café de especialidad ficticio que vende por suscripción.
 
-Landing page maquetada con HTML semántico y Tailwind CSS 4, mobile first, con modo oscuro y tres temas de color. Además: un panel de cliente (`panel.html`, desafío D5) y el ejercicio de captura a código (`d6/`, desafío D6).
+Landing page maquetada con HTML semántico y Tailwind CSS 4, mobile first, con modo oscuro y tres temas de color. Además: un panel de cliente (`panel.html`, desafío D5).
 
 | Móvil (375 px) | Escritorio (1280 px) | Escritorio, modo oscuro |
 | --- | --- | --- |
@@ -21,7 +21,7 @@ npm run build    # comprobación de tipos + build en dist/
 npm run preview  # sirve la build
 ```
 
-Páginas: `/` (landing), `/panel.html` (panel de cliente), `/d6/despues.html` (desafío D6).
+Páginas: `/` (landing) y `/panel.html` (panel de cliente).
 
 > El `.npmrc` del proyecto fija el registro público de npm por si vuestra configuración global apunta a un registro privado.
 
@@ -33,7 +33,7 @@ Uso el plugin oficial **`@tailwindcss/vite`** (sobre el [boiler-tailwind](https:
 - Es la opción que recomienda Tailwind 4 cuando el proyecto usa Vite. Es más rápida que pasar por PostCSS.
 - **PostCSS** (`@tailwindcss/postcss`) tendría sentido si la herramienta de build no fuera Vite (webpack, algunos frameworks…). En v4 tampoco hace falta `autoprefixer`: Tailwind ya se encarga de los prefijos.
 
-Toda la configuración está en el CSS (`src/style.css`): no hay `tailwind.config.js` (eso era la v3). `vite.config.ts` solo añade el plugin y declara las tres páginas de la build.
+Toda la configuración está en el CSS (`src/style.css`): no hay `tailwind.config.js` (eso era la v3). `vite.config.ts` solo añade el plugin y declara las dos páginas de la build.
 
 ## Secciones de la landing
 
@@ -77,8 +77,8 @@ Toda la configuración está en el CSS (`src/style.css`): no hay `tailwind.confi
 - [x] **D3 · Multitema**: "espresso", "matcha" y "caramelo", con selector en el pie. Variables dentro de `[data-theme="…"]`; el HTML no cambia, solo el atributo.
 - [x] **D4 · Utilidades propias**: `@utility contenedor`, `@utility titulo-seccion` y `@utility layout-panel` (cuándo sí y cuándo no, abajo).
 - [x] **D5 · Layout de aplicación**: [`panel.html`](panel.html), con `grid-template-areas`; solo hace scroll el contenido.
-- [x] **D6 · De captura a código**: [`d6/`](d6/README.md), con la captura, el "antes" de la IA, el "después" y la lista de 12 cambios.
-- [x] **D7 · Lighthouse**: Accesibilidad, Buenas prácticas y SEO a 100 en las tres páginas; Rendimiento 94-100.
+- [ ] D6 · De captura a código
+- [x] **D7 · Lighthouse**: Accesibilidad, Buenas prácticas y SEO a 100 en las dos páginas; Rendimiento 94-100.
 
 ## Lighthouse
 
@@ -89,7 +89,6 @@ Medido sobre la build (`npm run build && npm run preview`):
 | Landing | Móvil | 94 | **100** | 100 | 100 |
 | Landing | Escritorio | 99 | **100** | 100 | 100 |
 | Panel | Móvil / Escritorio | 100 | **100** | 100 | 100 |
-| D6 después | Móvil / Escritorio | 100 | **100** | 100 | 100 |
 
 Lo que ayuda al rendimiento: `width`/`height` en todas las `<img>` (no hay saltos al cargar), `loading="lazy"` en las imágenes que no se ven al entrar, `fetchpriority="high"` y `srcset` en la imagen del hero, imágenes de Unsplash pedidas al tamaño justo (`?w=600&h=400&fit=crop`) y un `robots.txt` para SEO.
 
@@ -153,16 +152,16 @@ En [`NOTAS.md`](./NOTAS.md) explico cada clase que no es evidente y con qué lec
 
 ## Comprobaciones
 
-- 375 px, 768 px y 1280 px sin scroll horizontal, en las tres páginas.
+- 375 px, 768 px y 1280 px sin scroll horizontal, en las dos páginas.
 - Recorrido completo con Tab: el foco siempre se ve. El menú móvil funciona con JavaScript desactivado.
 - Contraste: axe-core sin errores en 3 temas × claro/oscuro.
 - Probado con "Emulate CSS prefers-reduced-motion: reduce": no hay animaciones de entrada ni desplazamientos.
-- HTML de las tres páginas validado con `html-validate`.
+- HTML de las dos páginas validado con `html-validate`.
 - `npm run build` sin errores.
 
 ## 🤖 Bitácora de IA
 
-**Herramienta:** Claude Code (agente en el terminal), con el temario del módulo como contexto. Le pedí primero un resumen del temario y un plan por secciones, y después la implementación. Las capturas y las comprobaciones (ancho, teclado, formulario, Lighthouse, axe) se hicieron con Chrome headless. Para el D6 usé además un segundo agente con un modelo pequeño (ver [`d6/README.md`](d6/README.md)).
+**Herramienta:** Claude Code (agente en el terminal), con el temario del módulo como contexto. Le pedí primero un resumen del temario y un plan por secciones, y después la implementación. Las capturas y las comprobaciones (ancho, teclado, formulario, Lighthouse, axe) se hicieron con Chrome headless.
 
 ### 1 · Revisar contra el enunciado
 
@@ -262,21 +261,7 @@ El panel (D5) con `grid-template-areas`, `height: 100dvh` y `overflow-y-auto` en
 
 Los culpables eran los elementos `sr-only` (el `caption` de la tabla y un `h2` oculto): son `position: absolute`, y sin ningún padre posicionado se colocan respecto a la página, no dentro del `<main>` con scroll, así que la alargaban. Con `relative` en el `<main>` quedan dentro de su caja. Lo encontré midiendo con las DevTools el alto de cada zona del grid (estaba bien) y luego el `scrollHeight` del documento (no).
 
-### 8 · Una afirmación que resultó ser falsa
-
-#### Prompt
-
-Mismo prompt que el 7 (al escribir la lista de cambios del D6).
-
-#### Qué me dio
-
-En la lista de cambios del D6 escribió que `flex-shrink-0` "no existe en Tailwind 4".
-
-#### Qué corregí y por qué
-
-Antes de publicarlo lo comprobé con el compilador de Tailwind 4.1.17: **sí genera** `flex-shrink-0` (por compatibilidad), aunque desde la v3 el nombre recomendado es `shrink-0`. Corregí el texto. La IA "recuerda" cosas que suenan bien; hay que comprobarlas.
-
-### 9 · Un enlace activo con poco contraste
+### 8 · Un enlace activo con poco contraste
 
 #### Prompt
 
@@ -293,5 +278,4 @@ axe-core midió **4,4:1** (el mínimo es 4,5:1). Lo cambié a `acento-700`. Ligh
 ## Créditos
 
 - Fotos de [Unsplash](https://unsplash.com/); iconos de [Lucide](https://lucide.dev/); tipografía [Fraunces](https://fonts.google.com/specimen/Fraunces).
-- Captura de referencia del D6: sección "Changelog" de [linear.app](https://linear.app/), usada solo como referencia de diseño.
 - Proyecto ficticio de práctica.

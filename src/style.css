@@ -1,12 +1,9 @@
 @import "tailwindcss";
 
 /* Tailwind busca clases en todos los ficheros del proyecto: la documentación
-   está llena de nombres de clases de ejemplo y no queremos que entren en la build.
-   d6/antes.html es la salida en bruto de la IA (desafío D6): no forma parte de la web. */
+   está llena de nombres de clases de ejemplo y no queremos que entren en la build. */
 @source not "../README.md";
 @source not "../NOTAS.md";
-@source not "../d6/antes.html";
-@source not "../d6/README.md";
 
 /* P1 · Modo oscuro con botón: dark: se activa con la clase .dark en <html>,
    no con la preferencia del sistema (esa la leemos en JS como valor inicial). */
